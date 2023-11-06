@@ -1,25 +1,41 @@
-CC=cc
-INCLUDES=includes/
-FLAGS=-Wall -Wextra -Werror -I$(INCLUDES)
-SRCS=srcs/*.c
-OBJS=${SRCS:.c=.o}
-NAME=libft.a
+NAME		=	libft.a
 
-all:${NAME}
+CC		=	cc
+CFLAGS		=	-Wall -Wextra -Werror -g3
 
-${NAME}: ${OBJS}
+SRCS		=	atoi.c \
+				mem_edit.c \
+				mem_test.c \
+				string_edit.c \
+				string_test.c \
+				char_format.c \
+				char_test.c \
+				main.c \
+
+SRCS_FOLDER	=	srcs
+$(SRCS)		=	$(addprefix $(SRCS_FOLDER)/,$(SRCS))
+
+OBJS_FOLDER	=	objects
+OBJS		=	$(addprefix $(OBJS_FOLDER)/,$(SRCS:.c=.o))
+
+INCLUDES		=	includes
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
 	ar crs ${NAME} ${OBJS}
+	@echo "$(NAME) has been successfully created."
 
-.c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
-
-%.o:%c
-	${CC} ${FLAGS} srcs/*.c -o $@
+$(OBJS_FOLDER)/%.o: $(SRCS_FOLDER)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -I$(INCLUDES) -c -o $@ $<
 
 clean:
-	rm -f ${OBJS}
+	@rm -rf $(OBJS_FOLDER)
+	@echo "object files and directories have been removed."
 
-fclean:	clean
-	rm -f libft.a
+fclean: clean
+	@rm -f $(NAME)
+	@echo "$(NAME) and object files have been removed."
 
 re: fclean all
