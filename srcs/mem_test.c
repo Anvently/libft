@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:35:57 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/06 18:01:05 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/07 16:31:56 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (i < n)
 	{
 		if (((int *) s)[i] == c)
-			return (s + i);
+			return ((void *) s + i);
 		i++;
 	}
 	return (NULL);

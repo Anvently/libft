@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:24:21 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/06 18:01:05 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/07 16:33:11 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strchr(const char *s, int c)
 	while (s[i] && s[i] != c)
 		i++;
 	if (s[i] || (c == '\0'))
-		return (s + i);
+		return ((char *) s + i);
 	return (NULL);
 }
 
@@ -40,11 +40,11 @@ char	*ft_strrchr(const char *s, int c)
 
 	i = ft_strlen(s);
 	if (c == '\0')
-		return (s + i);
+		return ((char *) s + i);
 	while (i >= 0 && s[i] != c)
 		i--;
 	if (i >= 0)
-		return (s + i);
+		return ((char *) s + i);
 	return (NULL);
 }
 
@@ -73,7 +73,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 /// 0 if s1 and s2 are equal.
 /// Negative value if s1 < s2.
 /// Positive value if s1 > s2.
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
@@ -95,12 +95,12 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	i;
 
 	if (!little[0])
-		return (big);
+		return ((char *) big);
 	i = 0;
 	while (big[i] && i < len)
 	{
 		if (!ft_strncmp(big + i, little, len - i))
-			return (big + i);
+			return ((char *) big + i);
 		i++;
 	}
 	return (NULL);

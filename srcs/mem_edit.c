@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:05:23 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/06 18:01:05 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/07 17:57:04 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
+/*
+12  13  14  15  16  17  18  19  20  21  22  23  24
+                H   E   L   L   O
+				            X   X   X   X   X   X
+	X   X   X   X   X
+*/
+
 /// @brief Move n byte from dest to src.
 /// Both area may overlap so a temp buffer is used.
 /// @param dest Memory address
@@ -70,12 +77,22 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t	i;
+	int		direction;
 
-	i = n;
-	while (i >= 0)
+	if (dest <= src)
 	{
-		((unsigned char *) dest)[i] = ((unsigned char *) src)[i];
-		i--;
+		i = 0;
+		direction = 1;
+	}
+	else
+	{
+		i = n;
+		direction = -1;
+	}
+	while (i >= 0 && i <= n)
+	{
+		((char *) dest)[i] = ((char *) src)[i];
+		i += direction;
 	}
 	return (dest);
 }
