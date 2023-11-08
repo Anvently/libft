@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:16:12 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 16:54:58 by npirard          ###   ########.fr       */
+/*   Created: 2023/11/08 17:46:38 by npirard           #+#    #+#             */
+/*   Updated: 2023/11/08 17:46:55 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <stdio.h>
 
-int	main(void)
+/// @brief Erase n bytes of given memory address pointed by s,
+/// by writing '\0' byte.
+/// @param s Memory address
+/// @param n Number of byte to erase
+void	ft_bzero(void *s, size_t n)
 {
-	char s[] = {65, 66, 67, 68, 69, 0, 45};
-	char s0[] = { 0,  0,  0,  0,  0,  0, 0};
-	ft_putnbr_fd(ft_memmove(s0, s, 7) == s0 && !ft_memcmp(s, s0, 7), 1);
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+		((char *) s)[i++] = '\0';
 }

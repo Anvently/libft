@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:16:12 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 16:54:58 by npirard          ###   ########.fr       */
+/*   Created: 2023/11/08 17:54:32 by npirard           #+#    #+#             */
+/*   Updated: 2023/11/08 17:54:37 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <stdio.h>
 
-int	main(void)
+/// @brief Return the number of non empty bytes in a string
+/// @param s Null terminated string
+/// @return Size if the given string, excluding the null terminating byte
+size_t	ft_strlen(const char *s)
 {
-	char s[] = {65, 66, 67, 68, 69, 0, 45};
-	char s0[] = { 0,  0,  0,  0,  0,  0, 0};
-	ft_putnbr_fd(ft_memmove(s0, s, 7) == s0 && !ft_memcmp(s, s0, 7), 1);
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

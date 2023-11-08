@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:16:12 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 16:54:58 by npirard          ###   ########.fr       */
+/*   Created: 2023/11/08 17:57:11 by npirard           #+#    #+#             */
+/*   Updated: 2023/11/08 17:57:13 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <stdio.h>
 
-int	main(void)
+/// @brief Search for c in s starting from the end of s
+/// @param s String to search in
+/// @param c Char to find in s
+/// @return Address of the last occurence of c in s.
+/// NULL if not found
+char	*ft_strrchr(const char *s, int c)
 {
-	char s[] = {65, 66, 67, 68, 69, 0, 45};
-	char s0[] = { 0,  0,  0,  0,  0,  0, 0};
-	ft_putnbr_fd(ft_memmove(s0, s, 7) == s0 && !ft_memcmp(s, s0, 7), 1);
-	return (0);
+	int	i;
+
+	i = ft_strlen(s);
+	if (c == '\0')
+		return ((char *) s + i);
+	while (i >= 0 && s[i] != (char) c)
+		i--;
+	if (i >= 0)
+		return ((char *) s + i);
+	return (NULL);
 }

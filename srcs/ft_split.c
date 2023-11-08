@@ -6,11 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:15:11 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/07 18:15:32 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/08 13:05:46 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft.h>
+#include <libft.h>
 
 static int	split(char const *s, char **buffer, char sep, int mode)
 {

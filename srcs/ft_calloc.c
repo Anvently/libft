@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:16:12 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 16:54:58 by npirard          ###   ########.fr       */
+/*   Created: 2023/11/08 17:47:02 by npirard           #+#    #+#             */
+/*   Updated: 2023/11/08 17:48:27 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <stdio.h>
 
-int	main(void)
+/// @brief Allocates memory for nmenb element of size bytes.
+/// @param nmenb number of element
+/// @param size size of each element
+/// @return Address of allocated memory area.
+/// NULL if nmenb or size is 0 or if nmenb * size > INT_MAX
+void	*ft_calloc(size_t nmenb, size_t size)
 {
-	char s[] = {65, 66, 67, 68, 69, 0, 45};
-	char s0[] = { 0,  0,  0,  0,  0,  0, 0};
-	ft_putnbr_fd(ft_memmove(s0, s, 7) == s0 && !ft_memcmp(s, s0, 7), 1);
-	return (0);
+	void	*buffer;
+
+	if (!nmenb || !size || nmenb * size > INT_MAX)
+		return (NULL);
+	buffer = malloc(nmenb * size);
+	return (buffer);
 }
