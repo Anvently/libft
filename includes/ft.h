@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:23:38 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/07 18:17:58 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/08 11:53:51 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FT_H
 
 # include <stdlib.h>
+# include <limits.h>
+# include <unistd.h>
 
 ///------------------------ CHAR TEST -----------------------------
 
@@ -67,7 +69,7 @@ char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
-///------------------------ FD R/W ----------------------------
+///------------------------ FD I/O ----------------------------
 
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);

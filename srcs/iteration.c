@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:11:27 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/07 15:38:31 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/08 12:05:34 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 /// NULL if allocation fails.
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	i;
-	char *buffer;
+	int		i;
+	char	*buffer;
 
 	i = 0;
 	buffer = malloc(ft_strlen(s) + 1);

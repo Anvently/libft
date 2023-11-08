@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:22:50 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/07 18:20:16 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/08 12:05:54 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@
 char	*ft_strdup(const char *s)
 {
 	char	*buffer;
+	size_t	size;
 
-	buffer = mll
+	size = ft_strlen(s) + 1;
+	buffer = malloc(size);
+	if (!buffer)
+		return (NULL);
+	ft_strlcpy(buffer, s, size);
+	return (buffer);
 }
 
 /// @brief Return an allocated substring of s, starting at
@@ -94,5 +100,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	return (ft_substr(s1, i, trim_len));
 }
-
-

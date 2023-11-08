@@ -12,15 +12,17 @@ SRCS		=	type_conversion.c \
 				char_format.c \
 				char_test.c \
 				string_alloc.c \
-				iteration.c
-
+				iteration.c \
+				fd.c
 SRCS_FOLDER	=	srcs
 $(SRCS)		=	$(addprefix $(SRCS_FOLDER)/,$(SRCS))
+
+INCLUDES	=	includes/
 
 OBJS_FOLDER	=	objects
 OBJS		=	$(addprefix $(OBJS_FOLDER)/,$(SRCS:.c=.o))
 
-INCLUDES	=	includes/
+.PHONY		=	all clean fclean test re
 
 all: $(NAME)
 
@@ -35,7 +37,7 @@ $(NAME): $(OBJS)
 	@ar crs ${NAME} ${OBJS}
 	@echo "$(NAME) has been successfully created."
 
-$(OBJS_FOLDER)/%.o: $(SRCS_FOLDER)/%.c
+$(OBJS_FOLDER)/%.o: $(SRCS_FOLDER)/%.c Makefile includes/ft.h
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -c -o $@ $<
 
