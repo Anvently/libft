@@ -3,7 +3,7 @@ NAME		=	libft.a
 CC		=	cc
 CFLAGS		=	-Wall -Wextra -Werror -g3
 
-SRC		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
+SRC			=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c \
 				ft_strlcat.c ft_strlcpy.c ft_strchr.c \
 				ft_strrchr.c ft_strnstr.c ft_strncmp.c \
@@ -15,12 +15,24 @@ SRC		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 SRCS_FOLDER	=	srcs
 SRCS		=	$(addprefix $(SRCS_FOLDER)/,$(SRC))
 
+SRC_BONUS	=	ft_lstadd_back_bonus.c \
+				ft_lstadd_front_bonus.c \
+				ft_lstclear_bonus.c \
+				ft_lstdelone_bonus.c \
+				ft_lstiter_bonus.c \
+				ft_lstlast_bonus.c \
+				ft_lstmap_bonus.c \
+				ft_lstnew_bonus.c \
+				ft_lstsize_bonus.c
+SRCS_BONUS		=	$(addprefix $(SRCS_FOLDER)/,$(SRC_BONUS))
+
 INCLUDES	=	includes/
 
 OBJS_FOLDER	=	objects
 OBJS		=	$(addprefix $(OBJS_FOLDER)/,$(SRC:.c=.o))
+OBJS_BONUS	=	$(addprefix $(OBJS_FOLDER)/,$(SRC_BONUS:.c=.o))
 
-.PHONY		=	all clean fclean test re
+.PHONY		=	all clean fclean test re bonus so
 
 all: $(NAME)
 
@@ -35,11 +47,17 @@ $(NAME): $(OBJS)
 	@ar crs ${NAME} ${OBJS}
 	@echo "$(NAME) has been successfully created."
 
+bonus: $(OBJS) $(OBJS_BONUS)
+	@ar crs ${NAME} ${OBJS} $(OBJS_BONUS)
+	@echo "$(NAME) with bonus has been successfully created."
+
 $(OBJS_FOLDER)/%.o: $(SRCS_FOLDER)/%.c Makefile includes/libft.h
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -c -o $@ $<
 
-so: $(SRCS)
+so: objects/libft.so
+
+objects/libft.so: $(SRCS)
 	$(CC) -nostartfiles -fPIC $(CFLAGS) -I$(INCLUDES) $(SRCS)
 	gcc -nostartfiles -shared -o objects/libft.so $(OBJS)
 	cp objects/libft.so ../libft-unit-tests/libft.so
