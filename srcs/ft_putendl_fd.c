@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:41:29 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:41:32 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 18:25:17 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /// @param fd File descriptor. 0 stdin. 1 stdout. 2 stderr.
 void	ft_putendl_fd(char *s, int fd)
 {
-	while (*s)
+	while (s && *s)
 		write(fd, s++, 1);
-	write(1, "\n", 1);
+	write(fd, "\n", 1);
 }

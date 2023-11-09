@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:53:13 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:53:18 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 17:25:10 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_strlcpy(buffer, s1, size);
 	ft_strlcat(buffer, s2, size);
-	return (NULL);
+	return (buffer);
 }

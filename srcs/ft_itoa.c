@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:59:43 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 18:03:41 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 17:54:03 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	len_nb(size_t len, long nb)
 		nb = -nb;
 		len++;
 	}
-	else if (nb > 0)
+	if (nb > 0)
 		len = len_nb(len + 1, nb / 10);
 	if (len > 0)
 		return (len);
@@ -60,6 +60,7 @@ char	*ft_itoa(int n)
 	buffer = malloc(size + 1);
 	if (!buffer)
 		return (NULL);
+	buffer[size] = '\0';
 	index = buffer;
 	put_nbr(&index, (long) n);
 	return (buffer);

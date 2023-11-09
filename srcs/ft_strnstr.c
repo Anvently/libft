@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:57:00 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:58:17 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 18:55:10 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@
 /// @param len Number of character to search in big
 /// @return Address where little starts in big if found.
 /// Big if little is empty.
-/// NULL if little wasn't found is the len first characters of big.
+/// NULL if little wasn't found in the len first characters of big or if len is 0.
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	l_little;
 
 	l_little = ft_strlen(little);
-	if (!little[0])
+	if (!l_little)
 		return ((char *) big);
+	if (!len)
+		return (NULL);
 	i = 0;
 	while (big[i] && i < len && l_little <= len - i)
 	{

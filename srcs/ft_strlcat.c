@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:54:45 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:55:27 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 16:21:15 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	l_dst;
 
 	l_src = ft_strlen(src);
+	if (!size)
+		return (size + l_src);
 	l_dst = ft_strlen(dst);
 	if (l_dst >= size)
 		return (size + ft_strlen(src));

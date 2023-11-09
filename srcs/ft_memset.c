@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:46:27 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:46:31 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 15:31:59 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	*ft_memset(void *s, int c, size_t n)
 
 	i = 0;
 	while (i < n)
-		*((int *)(s + i++)) = c;
+		*((unsigned char *)(s + i++)) = (unsigned char) c;
 	return (s);
 }

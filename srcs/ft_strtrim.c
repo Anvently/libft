@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:52:35 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:53:32 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 17:31:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 		trim_len--;
 		len--;
 	}
-	return (ft_substr(s1, i, trim_len));
+	return (ft_substr(s1, i, trim_len + 1));
 }

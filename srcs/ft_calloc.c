@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:47:02 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:48:27 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 18:36:35 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@
 void	*ft_calloc(size_t nmenb, size_t size)
 {
 	void	*buffer;
+	int		bytes;
 
-	if (!nmenb || !size || nmenb * size > INT_MAX)
+	bytes = nmenb * size;
+	if (nmenb && bytes / nmenb != size)
 		return (NULL);
-	buffer = malloc(nmenb * size);
+	buffer = malloc(bytes);
+	if (!buffer)
+		return (NULL);
+	ft_memset(buffer, '\0', bytes);
 	return (buffer);
 }

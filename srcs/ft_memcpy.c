@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:47:10 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:47:26 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 16:54:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	size_t	i;
 
 	i = 0;
+	if (!dest && ! src)
+		return (NULL);
 	while (i < n)
 	{
 		((unsigned char *) dest)[i] = ((unsigned char *) src)[i];

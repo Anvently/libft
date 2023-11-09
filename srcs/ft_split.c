@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.c                                            :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:15:11 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 13:05:46 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 17:37:39 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	split(char const *s, char **buffer, char sep, int mode)
 			word_index++;
 		if (j && mode == 1)
 		{
-			buffer[word_index] = ft_substr(s, i, j);
-			if (!buffer[word_index])
+			buffer[word_index - 1] = ft_substr(s, i, j);
+			if (!buffer[word_index - 1])
 				return (-1);
 		}
 		i += j;

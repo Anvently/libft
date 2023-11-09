@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:44:29 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:44:34 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/09 18:06:40 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char	*buffer;
 
 	i = 0;
+	if (!s || !f)
+		return (NULL);
 	buffer = malloc(ft_strlen(s) + 1);
 	if (!buffer)
 		return (NULL);
 	while (s[i])
 	{
-		(*f)(i, s[i]);
+		buffer[i] = (*f)(i, s[i]);
 		i++;
 	}
 	buffer[i] = '\0';
