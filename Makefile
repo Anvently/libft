@@ -57,9 +57,9 @@ $(OBJS_FOLDER)/%.o: $(SRCS_FOLDER)/%.c Makefile includes/libft.h
 
 so: objects/libft.so
 
-objects/libft.so: $(SRCS)
-	$(CC) -nostartfiles -fPIC $(CFLAGS) -I$(INCLUDES) $(SRCS)
-	gcc -nostartfiles -shared -o objects/libft.so $(OBJS)
+objects/libft.so: bonus $(SRCS) $(SRCS_BONUS)
+	$(CC) -nostartfiles -fPIC $(CFLAGS) -I$(INCLUDES) $(SRCS) $(SRCS_BONUS)
+	gcc -nostartfiles -shared -o objects/libft.so $(OBJS) $(OBJS_BONUS)
 	cp objects/libft.so ../libft-unit-tests/libft.so
 
 clean:
