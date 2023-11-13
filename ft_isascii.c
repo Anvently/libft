@@ -6,11 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:38:52 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:38:56 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/13 14:40:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 /// @brief Check if c fits into ascii table [0-127]
 /// @param c Character to check

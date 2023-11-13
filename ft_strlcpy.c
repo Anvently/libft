@@ -6,11 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:55:01 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:55:09 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/13 14:40:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 /// @brief Try to copy the full length of src into dst,
 /// adding a null byte at the end.

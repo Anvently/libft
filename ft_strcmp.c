@@ -6,11 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:57:34 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/08 17:57:40 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/13 14:40:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 /// @brief Compares s1 and s2 using ascii value of character.
 /// @param s1 Null terminated string

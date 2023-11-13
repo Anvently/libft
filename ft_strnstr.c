@@ -6,11 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:57:00 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/10 16:33:30 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/13 14:40:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 /// @brief Find the first occurence of little in the len first characters of big
 /// @param big String where the search occcurs
