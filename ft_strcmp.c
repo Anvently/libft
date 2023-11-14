@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:57:34 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/14 16:08:33 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/14 16:46:52 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s1++;
 		s2++;
 	}
-	return (*s1 - *s2);
+	return ((unsigned char) *s1 - (unsigned char) *s2);
 }
