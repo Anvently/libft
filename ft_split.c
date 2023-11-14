@@ -6,13 +6,46 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:15:11 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/13 14:40:23 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/14 19:00:44 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	split(char const *s, char **buffer, char sep, int mode)
+static int	count_words(char const *s, char sep)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		while (s[i] && sep == s[i])
+			i++;
+		j = 0;
+		while (s[i + j] && sep != s[i + j])
+			j++;
+		if (j)
+			count++;
+		i += j;
+	}
+	return (count);
+}
+
+static char	*free_strings(char **strings)
+{
+	int	i;
+
+	i = 0;
+	while (*strings && (*strings)[i])
+		free((*strings)[i++]);
+	*strings = NULL;
+	return (NULL);
+}
+
+static char	*parse_words(char const *s, char **strings, char sep)
 {
 	int	i;
 	int	j;
@@ -28,16 +61,15 @@ static int	split(char const *s, char **buffer, char sep, int mode)
 		while (s[i + j] && sep != s[i + j])
 			j++;
 		if (j)
-			word_index++;
-		if (j && mode == 1)
 		{
-			buffer[word_index - 1] = ft_substr(s, i, j);
-			if (!buffer[word_index - 1])
-				return (-1);
+			word_index++;
+			strings[word_index - 1] = ft_substr(s, i, j);
+			if (!strings[word_index - 1])
+				return (free_strings(strings));
 		}
 		i += j;
 	}
-	return (word_index);
+	return (strings);
 }
 
 /// @brief Return a list of allocated string for each substring
@@ -53,11 +85,12 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	nb_words = split(s, NULL, c, 0);
+	nb_words = split(s, NULL, c);
 	strings = (char **) malloc((nb_words + 1) * sizeof(char *));
 	if (!strings)
 		return (NULL);
 	strings[nb_words] = NULL;
-	split(s, strings, c, 1);
+	if (!parse_words(s, strings, c))
+		return (NULL);
 	return (strings);
 }
