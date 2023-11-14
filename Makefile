@@ -6,7 +6,7 @@ CFLAGS		=	-Wall -Wextra -Werror -g3
 SRCS			=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c \
 				ft_strlcat.c ft_strlcpy.c ft_strchr.c \
-				ft_strrchr.c ft_strnstr.c ft_strncmp.c \
+				ft_strrchr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
 				ft_atoi.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 				ft_isprint.c ft_toupper.c ft_tolower.c \
 				ft_strmapi.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
@@ -25,7 +25,7 @@ SRCS_BONUS	=	ft_lstadd_back_bonus.c \
 
 INCLUDES	=	./
 
-OBJS_FOLDER	=	objects
+OBJS_FOLDER	=	./
 OBJS		=	$(addprefix $(OBJS_FOLDER)/,$(SRCS:.c=.o))
 OBJS_BONUS	=	$(addprefix $(OBJS_FOLDER)/,$(SRCS_BONUS:.c=.o))
 
@@ -48,20 +48,20 @@ bonus: $(OBJS) $(OBJS_BONUS)
 	@ar crs ${NAME} ${OBJS} $(OBJS_BONUS)
 	@echo "$(NAME) with bonus has been successfully created."
 
-$(OBJS_FOLDER)/%.o: %.c Makefile libft.h
+%.o: %.c Makefile libft.h
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -c -o $@ $<
 
 so: objects/libft.so
 
-objects/libft.so: bonus $(SRCS) $(SRCS_BONUS)
+libft.so: bonus $(SRCS) $(SRCS_BONUS)
 	$(CC) -nostartfiles -fPIC $(CFLAGS) -I$(INCLUDES) $(SRCS) $(SRCS_BONUS)
-	gcc -nostartfiles -shared -o objects/libft.so $(OBJS) $(OBJS_BONUS)
+	gcc -nostartfiles -shared -o libft.so $(OBJS) $(OBJS_BONUS)
 	cp objects/libft.so ../libft-unit-tests/libft.so
 
 clean:
-	@rm -rf $(OBJS_FOLDER)
-	@echo "object files and directories have been removed."
+	@rm -rf $(OBJS)
+	@echo "object files have been removed."
 
 fclean: clean
 	@rm -f $(NAME)
