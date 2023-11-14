@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:15:11 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/14 19:00:44 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/14 19:04:14 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,17 @@ static int	count_words(char const *s, char sep)
 	return (count);
 }
 
-static char	*free_strings(char **strings)
+static char	**free_strings(char **strings)
 {
 	int	i;
 
 	i = 0;
-	while (*strings && (*strings)[i])
-		free((*strings)[i++]);
-	*strings = NULL;
+	while (strings && strings[i])
+		free(strings[i++]);
 	return (NULL);
 }
 
-static char	*parse_words(char const *s, char **strings, char sep)
+static char	**parse_words(char const *s, char **strings, char sep)
 {
 	int	i;
 	int	j;
@@ -85,8 +84,8 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	nb_words = split(s, NULL, c);
-	strings = (char **) malloc((nb_words + 1) * sizeof(char *));
+	nb_words = count_words(s, c);
+	strings = malloc((nb_words + 1) * sizeof(char *));
 	if (!strings)
 		return (NULL);
 	strings[nb_words] = NULL;
