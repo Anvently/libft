@@ -52,15 +52,15 @@ bonus: $(OBJS) $(OBJS_BONUS)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -c -o $@ $<
 
-so: objects/libft.so
+so: libft.so
 
 libft.so: bonus $(SRCS) $(SRCS_BONUS)
 	$(CC) -nostartfiles -fPIC $(CFLAGS) -I$(INCLUDES) $(SRCS) $(SRCS_BONUS)
 	gcc -nostartfiles -shared -o libft.so $(OBJS) $(OBJS_BONUS)
-	cp objects/libft.so ../libft-unit-tests/libft.so
+	cp libft.so ../libft-unit-tests/libft.so
 
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) $(OBJS_BONUS) libft.so
 	@echo "object files have been removed."
 
 fclean: clean
