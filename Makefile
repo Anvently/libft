@@ -11,23 +11,14 @@ SRCS			=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_isprint.c ft_toupper.c ft_tolower.c \
 				ft_strmapi.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
 				ft_itoa.c ft_striteri.c \
-				ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-
-SRCS_BONUS	=	ft_lstadd_back_bonus.c \
-				ft_lstadd_front_bonus.c \
-				ft_lstclear_bonus.c \
-				ft_lstdelone_bonus.c \
-				ft_lstiter_bonus.c \
-				ft_lstlast_bonus.c \
-				ft_lstmap_bonus.c \
-				ft_lstnew_bonus.c \
-				ft_lstsize_bonus.c
+				ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+				ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
+				ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
 
 INCLUDES	=	./
 
 OBJS_FOLDER	=	./
 OBJS		=	$(addprefix $(OBJS_FOLDER)/,$(SRCS:.c=.o))
-OBJS_BONUS	=	$(addprefix $(OBJS_FOLDER)/,$(SRCS_BONUS:.c=.o))
 
 .PHONY		=	all clean fclean test re bonus so
 
@@ -44,9 +35,6 @@ $(NAME): $(OBJS)
 	@ar crs ${NAME} ${OBJS}
 	@echo "$(NAME) has been successfully created."
 
-bonus: $(OBJS) $(OBJS_BONUS)
-	@ar crs ${NAME} ${OBJS} $(OBJS_BONUS)
-	@echo "$(NAME) with bonus has been successfully created."
 
 %.o: %.c Makefile libft.h
 	@mkdir -p $(dir $@)
@@ -54,13 +42,13 @@ bonus: $(OBJS) $(OBJS_BONUS)
 
 so: libft.so
 
-libft.so: bonus $(SRCS) $(SRCS_BONUS)
-	$(CC) -nostartfiles -fPIC $(CFLAGS) -I$(INCLUDES) $(SRCS) $(SRCS_BONUS)
-	gcc -nostartfiles -shared -o libft.so $(OBJS) $(OBJS_BONUS)
+libft.so: $(SRCS)
+	$(CC) -nostartfiles -fPIC $(CFLAGS) -I$(INCLUDES) $(SRCS)
+	gcc -nostartfiles -shared -o libft.so $(OBJS)
 	cp libft.so ../libft-unit-tests/libft.so
 
 clean:
-	@rm -rf $(OBJS) $(OBJS_BONUS) libft.so
+	@rm -rf $(OBJS) libft.so
 	@echo "object files have been removed."
 
 fclean: clean
