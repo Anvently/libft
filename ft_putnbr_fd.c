@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:41:44 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/13 14:40:23 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/17 01:05:25 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	ft_putnbr_fd(int n, int fd)
 
 	if (n < 0)
 	{
-		nb = -n;
+		nb = - (long) n;
 		ft_putchar_fd('-', fd);
 	}
 	else
 		nb = n;
-	if (nb >= 0 && nb <= 9)
+	if (nb <= 9)
 		ft_putchar_fd('0' + nb, fd);
 	else
 	{
