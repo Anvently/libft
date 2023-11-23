@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:59:43 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/22 13:10:09 by npirard          ###   ########.fr       */
+/*   Updated: 2023/11/22 16:23:40 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ char	*ft_ultoa_base(unsigned long n, char *base)
 	len_base = ft_strlen(base);
 	if (len_base < 2)
 		return (NULL);
-	size = len_nb(0, (unsigned long) n, len_base);
+	size = len_nb(0, n, len_base);
 	buffer = malloc(size + 1);
 	if (!buffer)
 		return (NULL);
 	buffer[size] = '\0';
 	index = buffer;
-	put_nbr(&index, (unsigned long) n, base, len_base);
+	put_nbr(&index, n, base, len_base);
 	return (buffer);
 }
