@@ -6,11 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:59:43 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/22 16:23:40 by npirard          ###   ########.fr       */
+/*   Updated: 2023/12/01 16:56:36 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 static size_t	len_nb(size_t len, unsigned long nb, size_t len_base)
 {

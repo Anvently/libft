@@ -6,11 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:41:44 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/17 01:28:48 by npirard          ###   ########.fr       */
+/*   Updated: 2023/12/01 16:56:36 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 /// @brief Write n on given file descriptor
 /// @param n Number to write

@@ -6,11 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 20:59:37 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/20 13:51:40 by npirard          ###   ########.fr       */
+/*   Updated: 2023/12/01 16:56:36 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 /// @brief Delete all element and their content starting from given element.
 /// @param list Pointer toward the first element to clear.

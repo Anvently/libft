@@ -13,11 +13,18 @@ SRCS			=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_itoa.c ft_striteri.c ft_uitoa.c ft_ultoa.c ft_ultoa_base.c \
 				ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 				ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-				ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_lstinsert.c
+				ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_lstinsert.c \
+				ft_printf_args.c ft_printf_field.c	 ft_printf_parse_flags.c \
+				ft_printf.c ft_printf_field_util.c ft_printf_parse_index.c \
+				ft_printf_cast.c ft_printf_format.c	 ft_printf_printing.c \
+				ft_printf_check.c ft_printf_format_util.c ft_printf_str_conversion.c \
+				ft_printf_error.c
+
+
 
 INCLUDES	=	./
 
-OBJS_FOLDER	=	./
+OBJS_FOLDER	=	objs
 OBJS		=	$(addprefix $(OBJS_FOLDER)/,$(SRCS:.c=.o))
 
 .PHONY		=	all clean fclean test re bonus so
@@ -28,17 +35,18 @@ test: a.out
 	./a.out
 
 a.out: main.c $(NAME)
-	@$(CC) $(CFLAGS) -I$(INCLUDES) main.c ${NAME}
+	$(CC) $(CFLAGS) -I$(INCLUDES) main.c ${NAME}
 	@echo "Executable has been successfully created."
 
 $(NAME): $(OBJS)
-	@ar crs ${NAME} ${OBJS}
+	@echo "---- COMPILING LIBFT -------"
+	ar crs ${NAME} ${OBJS}
 	@echo "$(NAME) has been successfully created."
 
 
-%.o: %.c Makefile libft.h
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -c -o $@ $<
+$(OBJS_FOLDER)/%.o: %.c Makefile libft.h
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -I$(INCLUDES) -c -o $@ $<
 
 so: libft.so
 
@@ -48,12 +56,15 @@ libft.so: $(SRCS)
 	cp libft.so ../libft-unit-tests/libft.so
 
 clean:
-	@rm -rf $(OBJS) libft.so
+	@echo "---------CLEANING LIBFT OBJECT FILES---------"
+	rm -rf $(OBJS) libft.so
+	rm -d $(OBJS_FOLDER)
 	@echo "object files have been removed."
 
 fclean: clean
-	@rm -f $(NAME)
-	@rm -f a.out
+	@echo "-------CLEANING LIB AND EXECUTABLE ---------"
+	rm -f $(NAME)
+	rm -f a.out
 	@echo "$(NAME) and object files have been removed."
 
 re: fclean all

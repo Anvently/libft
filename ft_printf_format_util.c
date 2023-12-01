@@ -1,34 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_printf_format_util.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 17:53:13 by npirard           #+#    #+#             */
-/*   Updated: 2023/12/01 16:56:36 by npirard          ###   ########.fr       */
+/*   Created: 2023/11/23 10:41:14 by npirard           #+#    #+#             */
+/*   Updated: 2023/12/01 16:56:21 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-/// @brief Allocate and return the concatenation of s1 and s2
-/// @param s1 Null terminated string
-/// @param s2 Null terminated string
-/// @return Address of allocated string
-/// NULL if allocation fails.
-char	*ft_strjoin(char const *s1, char const *s2)
+/// @brief Return an allocated string where ```c``` was inserted ```n``` times
+/// in ```str``` starting from index ```start```.
+/// @param str
+/// @param start
+/// @param n
+/// @param c
+/// @return Address of the new string. ```NULL``` if allocation error.
+char	*insert_n_char(char *str, int start, int n, char c)
 {
 	char	*buffer;
 	size_t	size;
+	int		i;
 
-	if (!s1 || !s2)
-		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	size = ft_strlen(str) + n + 1;
 	buffer = malloc(size);
 	if (!buffer)
 		return (NULL);
-	ft_strlcpy(buffer, s1, size);
-	ft_strlcat(buffer, s2, size);
+	ft_strlcpy(buffer, str, start + 1);
+	i = start;
+	while (i - start < n)
+	{
+		buffer[i] = c;
+		i++;
+	}
+	buffer[n + start] = '\0';
+	ft_strlcat(buffer, str + start, size);
 	return (buffer);
 }

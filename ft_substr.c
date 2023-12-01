@@ -6,11 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:52:16 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/17 00:34:47 by npirard          ###   ########.fr       */
+/*   Updated: 2023/12/01 16:56:36 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 /// @brief Return an allocated substring of s, starting at
 /// index start with len characters

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:23:38 by npirard           #+#    #+#             */
-/*   Updated: 2023/11/22 14:05:10 by npirard          ###   ########.fr       */
+/*   Updated: 2023/12/01 16:54:54 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
+# include <stdio.h>
+# include <stdarg.h>
+# include <stdbool.h>
 
 ///------------------------ CHAR TEST -----------------------------
 
@@ -106,5 +109,170 @@ int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 
 ///-----------------------------------------------------------
+
+
+/*--------------------------------------------------------------
+---------------------------- PRINTF -----------------------------
+-----------------------------------------------------------------*/
+
+int		ft_printf(const char *str, ...);
+
+//Error handling
+void	*null_error(char *msg);
+void	*format_error(int error, char *parsing);
+void	*alloc_error(void);
+int		arg_index_error(int error, int index);
+bool	flag_error(char flag);
+
+///* ```# alternate form``` Value is converted to alternate form.
+///* For x or X : a non zero result has the string 0x placed before
+///*
+///* ```0 zero_padding``` The value is padded on the left with zero
+///* instead of blank. Works for ```d, i, u, x, X```. A minimum width
+///* must be defined. Will be ignored if it comes with a precision flag
+///*
+///* ```- left_justify``` The value is left adjusted on the given width.
+///* Overrides a 0 if both given.
+///*
+///* ```' ' sign_blank``` A blank is left before a positive number.
+///* Doesn't affect negative numbers.
+///*
+///* ```+ force_sign``` A sign is always placed before a signed number.
+///* Overrides ```' '``` if both given. Expand field width if necessary.
+///*
+///* ```. precision``` Defines if a precision was given.
+typedef struct s_flags
+{
+	bool	alternate_form;
+	bool	zero_padding;
+	bool	left_justify;
+	bool	sign_blank;
+	bool	force_sign;
+	bool	precision;
+}			t_flags;
+
+///* ### Flags
+///*
+///* Boolean list of all flags. All flags are set to false by default.
+///*
+///* ### Width
+///*
+///* Define a minimum field width. Default padding is right unless
+///* ```-``` flag has been given.
+///* Can be given as a decimal digit or as * to use the value specified
+///* in a given argument.
+///*
+///* ### Precision
+///*
+///* Defines the minimum number of digit to appear for ```d, i, u, x, X```
+///* conversion or the maximum number of character to be printed for ```s```
+///*  conversion. Overrides given field width if bigger. A 0 precision will
+///* only print non-zero numbers and won't print any character when applied to a
+///* string conversion.
+///*
+///* ### Type
+///*
+///* ```c``` print a char
+///* ```s``` print a string
+///* ```p``` print hexadecimal address
+///* ```d``` print decimal number
+///* ```i``` print integer in base 10
+///* ```u``` print unsigned decimal
+///* ```x``` print a number in hexadecimal using lowercase char
+///* ```X``` print a number in hexadecimal using uppercase char
+///* ```%``` print '%' sign
+///*
+///* ### Value
+///*
+///* Address of the value to print. Type is specified in conversion member.
+///* NULL if value is not assigned yet (case of %).
+typedef struct s_field
+{
+	t_flags	flags;
+	size_t	width;
+	int		precision;
+	char	type;
+	void	*value;
+}			t_field;
+
+//Structure util
+
+t_list	*new_field_node(void);
+void	init_field(t_field *field);
+void	free_field(void *field);
+
+//Input parsing
+
+t_list	*build_fields(char *str, va_list *va_args);
+char	*get_next_field(char *str, t_list **fields,
+			t_list **args_req, int *arg_index);
+char	*parse_field(char *str, t_field *field,
+			t_list **args_req, int *arg_index);
+
+//Field parsing
+
+char	*parse_arg_index(char *str, int *arg_index,
+			int *given_index, bool begin);
+char	*parse_flags(char *str, t_field *field);
+char	*parse_width(char *str, t_field *field,
+			t_list **args_req, int *arg_index);
+char	*parse_precision(char *str, t_field *field,
+			t_list **args_req, int *arg_index);
+char	*parse_conversion_type(char *str, t_field *field);
+
+typedef struct s_arg_req
+{
+	size_t	index;
+	void	*dest;
+	char	type;
+}			t_arg_req;
+
+//Struct util
+
+t_list	*new_argument_node(void);
+void	free_arg_req(void *arg_req);
+t_list	*insert_arg_req(t_list **args_req, t_list *arg_node);
+
+//Args retrieving
+
+t_list	*register_arg_request(t_list **args_req, void *dest,
+			size_t index, char type);
+int		retrieve_arguments(t_list *args_req, va_list *va_args);
+
+//Check
+
+bool	check_index_format(int new_format, int given_index, char *parsing);
+bool	check_type_conflict(t_arg_req *node1, t_arg_req *node2);
+bool	check_flag_conflict(t_field *field);
+bool	check_fields(t_list *fields);
+
+//Casting
+
+void	*alloc_arg_value(char type);
+void	*get_arg_value(va_list *va_args, char type);
+void	cast_to_dest(void *dest, void *value, char type);
+
+//Printing functions
+
+int		print_fields(t_list *fields);
+int		print_field(t_field *field);
+char	*build_str(t_field *field);
+char	*get_str_value(t_field *field);
+
+//Conversion
+
+char	*char_to_str(char c);
+char	*address_to_str(unsigned long addr);
+char	*str_to_str(char *str);
+char	*hexa_to_str(unsigned int nbr, char type);
+
+//Formatting
+
+char	*format_str(t_field *field, char *str);
+char	*format_precision(t_field *field, char *str);
+char	*format_alt_form(t_field *field, char *str);
+char	*format_sign(t_field *field, char *str);
+char	*format_width(t_field *field, char *str);
+char	*insert_n_char(char *str, int start, int n, char c);
 
 #endif
