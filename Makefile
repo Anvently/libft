@@ -18,7 +18,7 @@ SRCS			=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_printf.c ft_printf_field_util.c ft_printf_parse_index.c \
 				ft_printf_cast.c ft_printf_format.c	 ft_printf_printing.c \
 				ft_printf_check.c ft_printf_format_util.c ft_printf_str_conversion.c \
-				ft_printf_error.c
+				ft_printf_error.c ft_gnl.c
 
 
 
@@ -58,7 +58,7 @@ libft.so: $(SRCS)
 clean:
 	@echo "---------CLEANING LIBFT OBJECT FILES---------"
 	rm -rf $(OBJS) libft.so
-	rm -d $(OBJS_FOLDER)
+	rm -rdf $(OBJS_FOLDER)
 	@echo "object files have been removed."
 
 fclean: clean
