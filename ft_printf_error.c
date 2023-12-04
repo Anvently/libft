@@ -6,17 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 19:09:57 by npirard           #+#    #+#             */
-/*   Updated: 2023/12/01 16:56:21 by npirard          ###   ########.fr       */
+/*   Updated: 2023/12/04 10:40:34 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-
-void	*null_error(char *msg)
-{
-	ft_putendl_fd(msg, 2);
-	return (NULL);
-}
 
 void	*format_error(int error, char *parsing)
 {
@@ -43,11 +37,6 @@ int	arg_index_error(int error, int index)
 	else if (error == 2)
 		null_error("unused argument.");
 	return (0);
-}
-
-void	*alloc_error(void)
-{
-	return (null_error("Allocation error."));
 }
 
 bool	flag_error(char flag)
