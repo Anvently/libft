@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:15:11 by npirard           #+#    #+#             */
-/*   Updated: 2023/12/04 13:01:21 by npirard          ###   ########.fr       */
+/*   Updated: 2023/12/08 11:20:38 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	count_words(char const *s, char sep)
 	return (count);
 }
 
-char	**ft_free_strings(char **strings)
+char	**ft_free_strs(char **strings)
 {
 	int	i;
 
@@ -65,7 +65,7 @@ static char	**parse_words(char const *s, char **strings, char sep)
 			word_index++;
 			strings[word_index - 1] = ft_substr(s, i, j);
 			if (!strings[word_index - 1])
-				return (ft_free_strings(strings));
+				return (ft_free_strs(strings));
 		}
 		i += j;
 	}
