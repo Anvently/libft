@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:26:42 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/04 14:33:53 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:19:02 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /// @param str String to find in strs
 /// @return Pointer toward first occurence of str in strs.
 /// ```NULL``` if none found.
-int	ft_strschr(char **strs, char *str)
+char	*ft_strschr(char **strs, char *str)
 {
 	if (!strs || !str)
 		return (NULL);
