@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:42:54 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/11 10:47:19 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/11 15:34:56 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,61 @@ void	ft_lst_str_print(t_list *lst)
 		ft_putendl_fd(str, 1);
 		lst = lst->next;
 	}
+}
+
+/// @brief Return a conversion of ```strs``` into a list
+/// where all strings were copied.
+/// @param strs
+/// @return ```NULL``` if allocation error or if ```strs``` was
+/// empty.
+t_list	*ft_strstolst(char **strs)
+{
+	t_list	*list;
+	char	*str;
+
+	list = NULL;
+	while (strs && *strs)
+	{
+		str = ft_strdup(*strs);
+		if (!str)
+		{
+			ft_lstclear(&list, free);
+			return (NULL);
+		}
+		if (ft_lst_str_append(&list, str))
+		{
+			free(str);
+			ft_lstclear(&list, free);
+			return (NULL);
+		}
+		strs++;
+	}
+	return (list);
+}
+
+/// @brief Return a conversion of list of string into an array
+/// of string were all strings were copied.
+/// @param list
+/// @return ```NULL``` if allocation error.
+/// Array with NULL as the first element if list was ```NULL```.
+char	**ft_lsttostrs(t_list *list)
+{
+	int		size;
+	char	**strs;
+	int		i;
+
+	size = ft_lstsize(list);
+	strs = malloc(sizeof(char *) * (size + 1));
+	if (!strs)
+		return (NULL);
+	strs[size] = NULL;
+	i = 0;
+	while (list)
+	{
+		strs[i] = ft_strdup((char *)list->content);
+		if (!strs[i++])
+			return (ft_free_strs(strs));
+		list = list->next;
+	}
+	return (strs);
 }
