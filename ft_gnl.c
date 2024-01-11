@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 18:12:17 by npirard           #+#    #+#             */
-/*   Updated: 2023/12/01 17:54:19 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/08 14:50:22 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static ssize_t	update_buffer(int fd, char *buffer)
 
 /// @brief Read the next line into a given file.
 /// @param fd File descriptor to read into. |
-/// 0. Stdin. |
+/// 0. STDIN_FILENO. |
 /// 0-1024
 /// @return The line that has been read, including \\n.
 /// No \\n if end at the end of file.
