@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:42:54 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/11 15:34:56 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:46:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,12 @@ void	ft_lst_str_print(t_list *lst)
 t_list	*ft_strstolst(char **strs)
 {
 	t_list	*list;
-	char	*str;
 
 	list = NULL;
 	while (strs && *strs)
 	{
-		str = ft_strdup(*strs);
-		if (!str)
+		if (ft_lst_str_append(&list, *strs))
 		{
-			ft_lstclear(&list, free);
-			return (NULL);
-		}
-		if (ft_lst_str_append(&list, str))
-		{
-			free(str);
 			ft_lstclear(&list, free);
 			return (NULL);
 		}

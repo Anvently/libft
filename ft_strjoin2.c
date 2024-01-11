@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:53:13 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/11 13:11:18 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/11 16:56:37 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strjoin2(char const *s1, char const *s2)
 	else
 		len_s2 = 0;
 	size = len_s1 + len_s2 + 1;
-	buffer = malloc(size);
+	buffer = ft_calloc(1, size);
 	if (!buffer)
 		return (NULL);
 	if (s1)

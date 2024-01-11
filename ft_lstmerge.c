@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:25:33 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/11 14:34:38 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/11 16:29:21 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_list	*ft_lstmerge(t_list *node, t_list **from)
 {
 	t_list	*old_next;
 
+	if (!*from)
+		return (NULL);
 	ft_lstlast(*from)->next = node->next;
 	old_next = node->next;
 	node->next = *from;
