@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:57:54 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/17 17:15:12 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/17 17:32:29 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	ft_strncmp_rev(const char *s1, const char *s2, size_t n)
 	i = 0;
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
-	while (i < n && (len_s1 - i > 0) && (len_s2 - i > 0)
-		&& s1[len_s1 - i] == s2[len_s2 - i])
+	while (i < n && (len_s1 - i - 1 >= 0) && (len_s2 - i - 1 >= 0)
+		&& s1[len_s1 - i - 1] == s2[len_s2 - i - 1])
 		i++;
 	if (i == n)
 		return (0);
