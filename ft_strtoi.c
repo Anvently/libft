@@ -6,19 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:59:13 by npirard           #+#    #+#             */
-/*   Updated: 2023/12/06 18:53:43 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/17 15:44:39 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <limits.h>
-
-static int	ft_isspace(char c)
-{
-	if ((c >= '\b' && c <= '\r') || c == ' ')
-		return (1);
-	return (0);
-}
 
 /// @brief
 /// @param dest
