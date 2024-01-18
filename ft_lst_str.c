@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:42:54 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/11 17:46:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/18 14:53:47 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	ft_lst_str_print(t_list *lst)
 	while (lst)
 	{
 		str = (char *) lst->content;
-		ft_putendl_fd(str, 1);
+		if (!str)
+			ft_putendl_fd("(null)", 1);
+		else
+			ft_putendl_fd(str, 1);
 		lst = lst->next;
 	}
 }
