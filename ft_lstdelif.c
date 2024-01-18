@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:13:22 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/17 18:49:33 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/18 14:00:58 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_lstdelif(t_list **lst, int (*f)(void *), void (*del)(void *))
 	node = *lst;
 	while (node && node->next)
 	{
-		if ((*f)(node->next->content))
+		if ((*f)(node->next))
 		{
 			next = node->next->next;
 			ft_lstdelone(node->next, del);
