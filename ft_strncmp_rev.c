@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:57:54 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/18 16:04:49 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/19 11:31:02 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	ft_strncmp_rev(const char *s1, const char *s2, size_t n)
 		i++;
 	if (i == n)
 		return (0);
-	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+	return ((unsigned char) s1[len_s1 - i - 1]
+		- (unsigned char) s2[len_s2 - i - 1]);
 }
