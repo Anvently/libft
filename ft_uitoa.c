@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:59:43 by npirard           #+#    #+#             */
-/*   Updated: 2023/12/01 16:56:36 by npirard          ###   ########.fr       */
+/*   Updated: 2023/12/18 22:13:50 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	len_nb(size_t len, unsigned long nb)
 
 static void	put_nbr(char **s, unsigned long nb)
 {
-	if (nb >= 0 && nb <= 9)
+	if (nb <= 9)
 	{
 		**s = '0' + nb;
 		*s = *s + 1;

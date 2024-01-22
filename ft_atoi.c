@@ -6,18 +6,11 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:59:13 by npirard           #+#    #+#             */
-/*   Updated: 2023/12/01 16:56:36 by npirard          ###   ########.fr       */
+/*   Updated: 2024/01/17 15:43:14 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-
-static int	ft_isspace(char c)
-{
-	if ((c >= '\b' && c <= '\r') || c == ' ')
-		return (1);
-	return (0);
-}
 
 /// @brief Convert the initial part of a string to an integer.
 /// Format : \\[n spaces\\](+-)[n digit]

@@ -5,23 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 11:21:18 by npirard           #+#    #+#             */
-/*   Updated: 2023/12/18 09:48:25 by npirard          ###   ########.fr       */
+/*   Created: 2024/01/11 10:51:21 by npirard           #+#    #+#             */
+/*   Updated: 2024/01/22 16:35:21 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-/// @brief Free an array of strings.
-/// @param strs
-/// @return ```NULL```
-char	**ft_free_strs(char **strs)
+char	**ft_free_strs(char **strings)
 {
 	int	i;
 
 	i = 0;
-	while (strs && strs[i])
-		free(strs[i++]);
-	free(strs);
+	while (strings && strings[i])
+		free(strings[i++]);
+	free(strings);
 	return (NULL);
 }
