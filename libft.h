@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:23:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/01/17 18:29:57 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/13 13:49:35 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char	*ft_strschr(char **strs, char *str);
 int		ft_atoi(const char *nptr);
 int		ft_atol(const char *nptr);
 int		ft_strtoi(const char *str, int *dest);
+int		ft_strtof(char *str, float *dest, char **ptr);
 char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
 char	*ft_ultoa(unsigned long n);

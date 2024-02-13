@@ -19,7 +19,7 @@ SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_printf.c ft_printf_field_util.c ft_printf_parse_index.c \
 				ft_printf_cast.c ft_printf_format.c	 ft_printf_printing.c \
 				ft_printf_check.c ft_printf_format_util.c ft_printf_str_conversion.c \
-				ft_printf_error.c ft_gnl.c ft_error.c ft_abs.c ft_max.c ft_atol.c \
+				ft_printf_error.c ft_gnl.c ft_error.c ft_abs.c ft_max.c ft_atol.c ft_strtof.c \
 				ft_strtoi.c ft_print_strs.c ft_strslen.c ft_strsslen.c ft_free_strss.c \
 				ft_strschr.c ft_free_strs.c
 
