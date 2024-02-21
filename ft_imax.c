@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_max.c                                           :+:      :+:    :+:   */
+/*   ft_imax.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:02:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 13:13:42 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 13:07:42 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	*ft_max(void *a, void *b, size_t size)
+int	ft_imax(int a, int b)
 {
-	if (ft_memcmp(a, b, size) < 0)
+	if (a < b)
 		return (b);
 	return (a);
 }

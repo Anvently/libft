@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:23:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 11:38:36 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 13:14:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@
 /* ---------------------------------- MATH ---------------------------------- */
 
 int		ft_abs(int n);
-int		ft_max(int a, int b);
+int		ft_imax(int a, int b);
+double	ft_dmax(double a, double b);
+void	*ft_max(void *a, void *b, size_t size);
 
 ///------------------------ CHAR TEST -----------------------------
 
