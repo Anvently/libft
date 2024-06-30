@@ -12,6 +12,22 @@
 
 #include <libft.h>
 
+static int	ft_printf_va(int fd, const char* str, va_list* args) {
+	t_list			*fields;
+	int				nbr_chars;
+
+	nbr_chars = 0;
+	fields = build_fields((char *) str, args);
+	va_end(*args);
+	check_index_format(-1, 0, "");
+	if (!fields)
+		return (-1);
+	if (check_fields(fields))
+		nbr_chars = print_fields(fd, fields);
+	ft_lstclear(&fields, &free_field);
+	return (nbr_chars);
+}
+
 ///* ### ```%[m$][flags][width][.precision]conversion```
 ///*
 ///*
@@ -69,21 +85,23 @@
 ///* ``` Varg ```
 int	ft_printf(const char *str, ...)
 {
-	t_list			*fields;
-	int				nbr_chars;
 	va_list			args;
 
-	nbr_chars = 0;
-	if (!str || !*str)
+	if (!str)
+		return (-1);
+	if (!*str)
 		return (0);
 	va_start(args, str);
-	fields = build_fields((char *) str, &args);
-	va_end(args);
-	check_index_format(-1, 0, "");
-	if (!fields)
+	return (ft_printf_va(1, str, &args));
+}
+
+int	ft_dprintf(int fd, const char* str, ...) {
+	va_list			args;
+
+	if (!str)
 		return (-1);
-	if (check_fields(fields))
-		nbr_chars = print_fields(fields);
-	ft_lstclear(&fields, &free_field);
-	return (nbr_chars);
+	if (!*str)
+		return (0);
+	va_start(args, str);
+	return (ft_printf_va(fd, str, &args));
 }
