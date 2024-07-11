@@ -11,14 +11,16 @@ void	ft_lstinsert_comp(t_list** list, t_list* node, int (*comp)(void*, void*), b
 
 	if (node == NULL || list == NULL)
 		return;
-	if (*list == NULL || (((*comp)(node->content, (*list)->content) * (reverse * -1)) <= 0)) {
+	if (*list == NULL || (((*comp)(node->content, (*list)->content) * (reverse ? 1 : -1)) <= 0)) {
 		ft_lstadd_front(list, node);
 		return;
 	}
 	current = *list;
 	while (current) {
-		if (current->next == NULL || (((*comp)(node->content, current->next->content) * (reverse * -1)) <= 0))
+		if (current->next == NULL || (((*comp)(node->content, current->next->content) * (reverse ? 1 : -1)) <= 0)) {
 			ft_lstadd_back(&current, node);
+			return ;
+		}
 		current = current->next;
 	}
 }

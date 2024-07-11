@@ -16,7 +16,7 @@ SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
 				ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_lstinsert.c \
 				ft_lstmerge.c ft_lstprint.c ft_lst_str.c ft_lstdelif.c ft_lstinsert_comp.c \
-				ft_lstpop_front.c \
+				ft_lstpop_front.c ft_lstat.c \
 				ft_printf_args.c ft_printf_field.c	 ft_printf_parse_flags.c \
 				ft_printf.c ft_printf_field_util.c ft_printf_parse_index.c \
 				ft_printf_cast.c ft_printf_format.c	 ft_printf_printing.c \
