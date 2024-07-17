@@ -20,7 +20,7 @@
 /// ```NULL``` if allocation error.
 char	*format_str(t_field *field, char *str)
 {
-	if (ft_strchr("sdiuxX", field->type) && field->precision >= 0
+	if (ft_strchr("sdiuxXy", field->type) && field->precision >= 0
 		&& field->flags.precision)
 		str = format_precision(field, str);
 	if (field->flags.alternate_form && ft_strchr("xX", field->type)
@@ -125,9 +125,9 @@ char	*format_width(t_field *field, char *str)
 
 	len_str = ft_strlen(str);
 	if (field->flags.precision && field->precision <= (int) field->width
-		&& ft_strchr("diuxX", field->type))
+		&& ft_strchr("diuxXy", field->type))
 		field->flags.zero_padding = false;
-	if (field->flags.zero_padding && ft_strchr("diuxX", field->type))
+	if (field->flags.zero_padding && ft_strchr("diuxXy", field->type))
 	{
 		if (str[0] == '-' || str[0] == '+')
 			buffer = insert_n_char(str, 1, field->width - len_str, '0');

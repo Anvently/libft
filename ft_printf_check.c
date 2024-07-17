@@ -64,8 +64,8 @@ bool	check_type_conflict(t_arg_req *node1, t_arg_req *node2)
 	else if (((t_arg_req *) node1)->type == 's'
 		&& ((t_arg_req *) node2)->type != 's')
 		error++;
-	else if (ft_strchr("pdiuxXt", ((t_arg_req *) node1)->type)
-		&& !ft_strchr("pdiuxXt", ((t_arg_req *) node2)->type))
+	else if (ft_strchr("pdiuxXty", ((t_arg_req *) node1)->type)
+		&& !ft_strchr("pdiuxXty", ((t_arg_req *) node2)->type))
 		error++;
 	if (error)
 		return (arg_index_error(1, (int)((t_arg_req *) node2)->index));
@@ -86,15 +86,15 @@ bool	check_flag_conflict(t_field *field)
 {
 	if (field->flags.alternate_form == true && !ft_strchr("xX", field->type))
 		return (flag_error('#'));
-	if (field->flags.zero_padding == true && !ft_strchr("diuxX", field->type))
+	if (field->flags.zero_padding == true && !ft_strchr("diuxXy", field->type))
 		return (flag_error('0'));
 	if (field->flags.left_justify == true && field->flags.zero_padding == true)
 		return (flag_error('-'));
-	if (field->flags.sign_blank == true && !ft_strchr("diuxX", field->type))
+	if (field->flags.sign_blank == true && !ft_strchr("diuxXy", field->type))
 		return (flag_error(' '));
 	if (field->flags.force_sign == true)
 	{
-		if (!ft_strchr("diuxX", field->type))
+		if (!ft_strchr("diuxXy", field->type))
 			return (flag_error('+'));
 		if (field->flags.sign_blank == true)
 			return (flag_error('+'));
