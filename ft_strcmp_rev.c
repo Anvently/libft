@@ -12,7 +12,7 @@ int	ft_strcmp_rev(const char *s1, const char *s2)
 	size_t			i;
 	size_t			len_s1;
 	size_t			len_s2;
-	unsigned char	c1, c2;
+	unsigned char	c1 = 0, c2 = 0;
 
 	i = 0;
 	len_s1 = ft_strlen(s1);
