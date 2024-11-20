@@ -47,11 +47,11 @@ bool	flag_error(char flag)
 	if (flag == '#')
 		ft_putendl_fd("Only works for xX types.", 2);
 	else if (flag == '0' || flag == ' ')
-		ft_putendl_fd("Only works for diuxX types.", 2);
+		ft_putendl_fd("Only works for diuxXy types.", 2);
 	else if (flag == '-')
 		ft_putendl_fd("Only works if flag 0 is not given.", 2);
 	else if (flag == '+')
-		ft_putendl_fd("Only works for diuxX types "
+		ft_putendl_fd("Only works for diuxXy types "
 			"and if flag ' ' is not given.", 2);
 	else if (flag == '.')
 		ft_putendl_fd("Doesn't work for p and c types.", 2);

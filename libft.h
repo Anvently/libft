@@ -65,8 +65,10 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp_rev(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strncmp_rev(const char *s1, const char *s2, size_t n);
+int		ft_stricmp(const char* s1, const char* s2);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
@@ -86,6 +88,7 @@ char	***ft_free_strss(char ***strs);
 int		ft_strslen(char **strs);
 int		ft_strsslen(char ***strs);
 char	*ft_strschr(char **strs, char *str);
+char	*ft_getenv(char *var, char **env);
 
 ///---------------------- TYPE CONVERSION -----------------------
 
@@ -98,6 +101,7 @@ char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
 char	*ft_ultoa(unsigned long n);
 char	*ft_ultoa_base(unsigned long n, char *base);
+unsigned int	ft_putunbr_buffer(unsigned long nbr, char* buffer, unsigned int size);
 
 ///------------------------ ITERATION ---------------------------
 
@@ -142,12 +146,15 @@ void	ft_lstclear(t_list **list, void (*del)(void *));
 void	ft_lstiter(t_list *list, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstmerge(t_list *node, t_list **from);
+void	ft_lstinsert_comp(t_list** list, t_list* node, int (*comp)(void*, void*), bool reverse);
+void	ft_lstpop_front(t_list** list, void (*del)(void *));
 
 ///----------------------- READ ------------------------------
 
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstprint(t_list *pt, void (*disp)(void *));
+int				ft_lstsize(t_list *lst);
+t_list			*ft_lstlast(t_list *lst);
+void			ft_lstprint(t_list *pt, void (*disp)(void *));
+t_list*			ft_lstat(t_list* list, const unsigned int index);
 
 /* ------------------------------- STRING LIST ------------------------------ */
 
@@ -169,6 +176,7 @@ char	*ft_gnl(int fd);
 -----------------------------------------------------------------*/
 
 int		ft_printf(const char *str, ...);
+int		ft_dprintf(int fd, const char *str, ...);
 
 //Error handling
 void	*null_error(char *msg);
@@ -307,8 +315,8 @@ void	cast_to_dest(void *dest, void *value, char type);
 
 //Printing functions
 
-int		print_fields(t_list *fields);
-int		print_field(t_field *field);
+int		print_fields(int fd, t_list *fields);
+int		print_field(int fd, t_field *field);
 char	*build_str(t_field *field);
 char	*get_str_value(t_field *field);
 
