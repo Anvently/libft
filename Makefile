@@ -1,7 +1,7 @@
 NAME		=	libft.a
 
 CC			=	gcc
-CFLAGS		=	-Wextra -O2
+CFLAGS		=	-Wextra -O2 -g
 
 SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c \
@@ -25,7 +25,8 @@ SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_printf_error.c ft_gnl.c ft_error.c ft_abs.c ft_imax.c ft_atol.c ft_strtof.c \
 				ft_strtod.c ft_dmax.c ft_max.c ft_getenv.c \
 				ft_strtoi.c ft_print_strs.c ft_strslen.c ft_strsslen.c ft_free_strss.c \
-				ft_strschr.c ft_free_strs.c
+				ft_strschr.c ft_free_strs.c \
+				ft_hexdump.c
 
 
 
