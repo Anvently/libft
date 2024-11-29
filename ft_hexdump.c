@@ -27,7 +27,7 @@ static void	print_chars(const char* buffer, size_t len) {
 /// @param len 
 /// @param unit
 /// @return ```1```  if sys error. 
-void	ft_hexdump(const void* addr, size_t n, size_t unit) {
+void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
 	int					n_entry_line, offset, i;
 	char				spaces[64] = {' '};
 
@@ -36,10 +36,10 @@ void	ft_hexdump(const void* addr, size_t n, size_t unit) {
 	if (n_entry_line == 0)
 		n_entry_line = 1;
 	offset = n_entry_line * unit;
-	for (void* data = addr; data && data < (addr + n * unit); data += offset) {
+	for (void* data = (addr + start_from * unit); data && data < (addr + (start_from * unit) + (n * unit)); data += offset) {
 		ft_printf("%08x", ((data - addr)));
 		write(1, " ", 1);
-		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + n * unit); i++) {
+		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + (start_from * unit) + (n * unit)); i++) {
 			if (i == (n_entry_line / 2))
 				write(1, "  ", 2);
 			else
@@ -53,4 +53,4 @@ void	ft_hexdump(const void* addr, size_t n, size_t unit) {
 		write(1, "|", 1);
 		write(1, "\n", 1);
 	}
-}                                    
+}
