@@ -177,7 +177,31 @@ int		ft_lst_str_append(t_list **lst, char *str);
 char	**ft_lsttostrs(t_list *list);
 t_list	*ft_strstolst(char **strs);
 
-///-----------------------------------------------------------
+
+/*--------------------------------------------------------------
+--------------------------- VECTORS -----------------------------
+-----------------------------------------------------------------*/
+
+
+typedef void	t_vector;
+typedef struct {
+		size_t	len;
+		size_t	capacity;
+		size_t	type_size;
+}		t_vector_header;
+
+typedef struct {
+		t_vector_header	header;
+		t_vector*	data;
+}		t_vector_struct;
+
+t_vector*	ft_vector_create(size_t type_size, size_t initial_capacity);
+void		ft_vector_free(t_vector** vector_addr);
+bool		ft_vector_push(t_vector** vector_addr, void* data);
+bool		ft_vector_pop(t_vector** vector_addr);
+bool		ft_vector_insert(t_vector** vector_addr, size_t pos, void* data);
+bool		ft_vector_reserve(t_vector** vector_addr, size_t nbr_el);
+size_t		ft_vector_size(const t_vector* vector);
 
 /*--------------------------------------------------------------
 ---------------------- GET_NEXT_LINE -----------------------------
