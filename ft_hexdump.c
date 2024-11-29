@@ -49,7 +49,7 @@ void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
 		if (i != n_entry_line)
 			write(1, spaces, (n_entry_line - i) * ((unit * 2) + 1) + (i <= (n_entry_line / 2) ? 1 : 0));
 		write(1, "  |", 3);
-		print_chars(data, offset);
+		print_chars(data, offset - ((n_entry_line - i) * unit));
 		write(1, "|", 1);
 		write(1, "\n", 1);
 	}
