@@ -90,6 +90,7 @@ void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
+void	ft_memswap(void* a, void* b, size_t size);
 void	*ft_calloc(size_t nmenb, size_t size);
 void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t offset);
 void	ft_hexdump_color_zone(const void* addr, size_t n, size_t unit, size_t start_from, size_t len_zone);
@@ -210,6 +211,13 @@ bool		ft_vector_resize(t_vector** vector_addr, size_t size);
 void		ft_vector_free(t_vector** vector_addr);
 size_t		ft_vector_size(const t_vector* vector);
 void		ft_dump_vector(t_vector* vector, bool print_capacity);
+
+/*--------------------------------------------------------------
+---------------------- SORTING -----------------------------
+-----------------------------------------------------------------*/
+
+void	_ft_insertion_sort(void* range, size_t n, size_t el_size, int (*cmp)(void* a, void* b));
+# define ft_insertion_sort(range, n, cmp_func)(_ft_insertion_sort(range, n, sizeof(*range), cmp_func))
 
 /*--------------------------------------------------------------
 ---------------------- GET_NEXT_LINE -----------------------------
