@@ -1,6 +1,6 @@
 #include <libft.h>
 
-static t_vector_header*	_get_vector_header(t_vector* vector) {
+static t_vector_header*	_get_vector_header(const t_vector* vector) {
 	if (vector == NULL)
 		return (NULL);
 	return (((t_vector_header*)vector) - 1);
@@ -17,7 +17,7 @@ static bool	_vector_realloc(t_vector** vector_addr, t_vector_header* header, siz
 		sizeof(t_vector_header) + target_capacity * header->type_size);
 	if (!new_vector)
 		return (false);
-	if (new_vector != header)
+	if (new_vector != (t_vector_struct*)header)
 		*vector_addr = &new_vector->data;
 	new_vector->header.capacity = target_capacity;
 	return (true);
@@ -86,28 +86,39 @@ void			ft_vector_free(t_vector** vector_addr) {
 /// @param vector_addr 
 /// @param data 
 /// @return ```false``` if a reallocation faield. Vector IS NOT freed
-bool			ft_vector_push(t_vector** vector_addr, void* data) {
+bool			ft_vector_push(t_vector** vector_addr, const void* data) {
 	t_vector_header*	header;
 	
 	if (!*vector_addr)
 		return (false);
 	header = _get_vector_header(*vector_addr);
-	if (_has_capacity(header) == false) {
-		ft_printf("expanding\n");
-		if (_vector_expand(vector_addr) == false)
-			return (false);
-	}
-	ft_memcpy(*vector_addr + header->len * header->type_size, data, header->type_size);
-	ft_hexdump(*vector_addr + header->len * header->type_size, 1, header->type_size, 0);
-	header->len += 1;
-	return (true);
+	return (ft_vector_insert_range(vector_addr, header->len, data, 1));
 }
 
-/// @brief Remove the last element of the vector
+/// @brief Insert data at given pos in vector. Pos IS NOT checked.
+/// @param vector_addr 
+/// @param pos 
+/// @param data 
+/// @return ```false``` if ```vector_addr``` was ```NULL``` or if a realloc operation
+/// failed. Vector IS NOT freed
+bool	ft_vector_insert(t_vector** vector_addr, size_t pos, const void* data) {
+	return (ft_vector_insert_range(vector_addr, pos, data, 1));
+}
+
+bool	ft_vector_push_range(t_vector** vector_addr, const void* data, size_t n) {
+	t_vector_header*	header;
+	
+	if (!*vector_addr)
+		return (false);
+	header = _get_vector_header(*vector_addr);
+	return (ft_vector_insert_range(vector_addr, header->len, data, n));
+}
+
+/// @brief Remove the last element of the vector. Safe to use with an empty vector.
 /// @param vector_addr 
 /// @return ```false``` if ```vector_addr``` was ```NULL``` or if a shrinking operation
-/// failed. Vector IS NOT freed
-bool		ft_vector_pop(t_vector** vector_addr) {
+/// failed. Vector IS NOT freed. 
+bool	ft_vector_pop(t_vector** vector_addr) {
 	t_vector_header*	header;
 
 	if (!*vector_addr)
@@ -115,11 +126,70 @@ bool		ft_vector_pop(t_vector** vector_addr) {
 	header = _get_vector_header(*vector_addr);
 	if (header->len == 0)
 		return (true);
-	header->len -= 1;
+	return (ft_vector_erase_range(vector_addr, header->len - 1, 1));
+}
+
+bool		ft_vector_pop_range(t_vector** vector_addr, size_t n) {
+	t_vector_header*	header;
+
+	if (!*vector_addr)
+		return (false);
+	header = _get_vector_header(*vector_addr);
+	if (header->len == 0)
+		return (true);
+	return (ft_vector_erase_range(vector_addr, header->len - 1, n));
+}
+
+bool		ft_vector_erase(t_vector** vector_addr, size_t pos) {
+	return (ft_vector_erase_range(vector_addr, pos, 1));
+}
+
+bool		ft_vector_erase_range(t_vector** vector_addr, size_t pos, size_t n) {
+	t_vector_header*	header;
+
+	if (!*vector_addr)
+		return (false);
+	header = _get_vector_header(*vector_addr);
+	if (header->len == 0)
+		return (true);
+	else if (pos + 1 > header->len)
+		*(int*)0 = 0; // We want to segfault when accessing non valid index
+	if (pos + 1 != header->len)
+		ft_memmove(*vector_addr + pos * header->type_size,
+			*vector_addr + (pos + n) * header->type_size, header->len - (pos + 1));
+	header->len -= n;
 	if (_has_over_capacity(header)) {
-		if (_vector_shrink(vector_addr) == false)
+		if (_vector_realloc(vector_addr, header, header->len * 2) == false)
 			return (false);
 	}
+	return (true);
+}
+
+/// @brief Insert a range of ```n``` element at index ```pos```. 
+/// @param vector_addr 
+/// @param pos 
+/// @param data 
+/// @param n 
+/// @return ```false``` if ```vector_addr``` was ```NULL``` or if a realloc operation
+/// failed. Vector IS NOT freed
+bool	ft_vector_insert_range(t_vector** vector_addr, size_t pos, const void* data, size_t n) {
+	t_vector_header*	header;
+
+	if (!*vector_addr)
+		return (false);
+	header = _get_vector_header(*vector_addr);
+	if (pos > header->len)
+		*(int*)0 = 0; // We want to segfault when accessing non valid index
+	if (header->len + n > header->capacity) {
+		if (_vector_realloc(vector_addr, header, (header->len + n) * 2) == false)
+			return (false);
+		header = _get_vector_header(*vector_addr);
+	}
+	if (pos < header->len)
+		ft_memmove(*vector_addr + (pos + n) * header->type_size,
+			*vector_addr + pos * header->type_size, (header->len - pos) * header->type_size);
+	ft_memcpy(*vector_addr + pos * header->type_size, data, header->type_size * n);
+	header->len += n;
 	return (true);
 }
 
@@ -146,4 +216,33 @@ bool	ft_vector_reserve(t_vector** vector_addr, size_t nbr_el) {
 	return (_vector_realloc(vector_addr, header, nbr_el));
 }
 
-bool			ft_vector_insert(t_vector** vector_addr, size_t pos, void* data);
+/// @brief Force the vector for a new size. Vector is not necessarly shrinked.
+/// @param vector_addr 
+/// @param size 
+/// @return 
+bool		ft_vector_resize(t_vector** vector_addr, size_t size) {
+	t_vector_header*	header;
+
+	if (!*vector_addr)
+		return (false);
+	header = _get_vector_header(*vector_addr);
+	header->len = size;
+	if (_has_over_capacity(header)) {
+		if (_vector_realloc(vector_addr, header, header->len * 2) == false)
+			return (false);
+	}
+	return (true);
+}
+
+void	ft_dump_vector(t_vector* vector, bool print_capacity) {
+	t_vector_header*	header;
+
+	header = _get_vector_header(vector);
+	if (!header) {
+		ft_printf("(null)\n");
+		return;
+	}
+	ft_printf("size = %d/%d | type_size = %y\n", header->len, header->capacity, header->type_size);
+	ft_hexdump_color_zone(vector, (print_capacity ? header->capacity : header->len) * header->type_size,
+		1, 0, header->type_size);
+}

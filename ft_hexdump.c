@@ -38,7 +38,7 @@ void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
 	if (n_entry_line == 0)
 		n_entry_line = 1;
 	offset = n_entry_line * unit;
-	for (void* data = (addr + start_from * unit); data && data < (addr + (start_from * unit) + (n * unit)); data += offset) {
+	for (const void* data = (addr + start_from * unit); data && data < (addr + (start_from * unit) + (n * unit)); data += offset) {
 		ft_printf("%08x", ((data - addr)));
 		write(1, " ", 1);
 		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + (start_from * unit) + (n * unit)); i++) {
@@ -78,7 +78,7 @@ void	ft_hexdump_color_zone(const void* addr, size_t n, size_t unit, size_t start
 	if (n_entry_line == 0)
 		n_entry_line = 1;
 	offset = n_entry_line * unit;
-	for (void* data = ((void*)addr + start_from * unit); data && data < (addr + (start_from * unit) + (n * unit)); data += offset) {
+	for (const void* data = (addr + start_from * unit); data && data < (addr + (start_from * unit) + (n * unit)); data += offset) {
 		ft_printf("%08x", ((data - addr)));
 		write(1, " ", 1);
 		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + (start_from * unit) + (n * unit)); i++, y++) {
