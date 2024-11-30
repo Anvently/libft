@@ -19,10 +19,32 @@
 /// @return s memory address
 void	*ft_memset(void *s, int c, size_t n)
 {
-	size_t	i;
+	char	value64[sizeof(long)] = {c, c, c, c, c, c, c, c};
+	size_t	offset;
 
-	i = 0;
-	while (i < n)
-		*((unsigned char *)(s + i++)) = (unsigned char) c;
+	if (n == 0)
+		return (s);
+	for (offset = 0; offset < (n / sizeof(long)); offset += sizeof(long))
+		((long *) s)[offset / sizeof(long)] = *(long *)&value64[0];
+	for (offset;
+		offset < (sizeof(long) * (n / sizeof(long)) + (n % sizeof(long)));
+		offset += sizeof(unsigned char))
+		((unsigned char *) s)[offset] = c;
 	return (s);
 }
+
+// void	*ft_memcpy(void *dest, const void *src, size_t n)
+// {
+// 	size_t	offset;
+
+// 	if (n == 0 || dest == src)
+// 		return (dest);
+// 	for (offset = 0; offset < (n / sizeof(long)); offset += sizeof(long))
+// 		((long *) dest)[offset / sizeof(long)] = ((long *) src)[offset / sizeof(long)];
+// 	for (offset;
+// 		offset < (sizeof(long) * (n / sizeof(long)) + (n % sizeof(long)));
+// 		offset += sizeof(unsigned char))
+// 		((unsigned char *) dest)[offset] = ((unsigned char *) src)[offset];
+// 	return (dest);
+// }
+
