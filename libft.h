@@ -219,6 +219,9 @@ void		ft_dump_vector(t_vector* vector, bool print_capacity);
 void	_ft_insertion_sort(void* range, size_t n, size_t el_size, int (*cmp)(void* a, void* b));
 # define ft_insertion_sort(range, n, cmp_func)(_ft_insertion_sort(range, n, sizeof(*range), cmp_func))
 
+int	_ft_merge_sort(void* range, size_t len, size_t el_size, int (*cmp)(void* a, void* b));
+# define ft_merge_sort(range, n, cmp_func)(_ft_merge_sort(range, n, sizeof(*range), cmp_func))
+
 /*--------------------------------------------------------------
 ---------------------- GET_NEXT_LINE -----------------------------
 -----------------------------------------------------------------*/
