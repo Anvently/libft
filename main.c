@@ -5,6 +5,10 @@ typedef struct {
 	int b;
 } t_foo;
 
+static int	int_comp(void* a, void* b) {
+	return (*(int*)b - *(int*)a);
+}
+
 int main(void) {
 
 	t_vector*	vector = ft_vector_create(sizeof(t_foo), 0);
@@ -65,12 +69,17 @@ int main(void) {
 		}
 	}
 
+	// ft_dump_vector(vector_int, false);
+
+	// if (ft_vector_resize((void*)&vector_int, 1) == false)
+	// 	ft_printf("alloc error\n");
+
 	ft_dump_vector(vector_int, false);
 
-	if (ft_vector_resize((void*)&vector_int, 1) == false)
-		ft_printf("alloc error\n");
+	ft_insertion_sort((int*)vector_int, ft_vector_size(vector_int), &int_comp);
 
 	ft_dump_vector(vector_int, false);
+
 
 	ft_vector_free((void**)&vector_int);
 
