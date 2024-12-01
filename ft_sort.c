@@ -23,7 +23,7 @@ void	_ft_insertion_sort(void* range, size_t len, size_t el_size, int (*cmp)(void
 	}
 }
 
-static int	_ft_merge(void* range, size_t len1, size_t len2, size_t el_size, int (*cmp)(void* a, void* b)) {
+static int	_ft_merge(void* range, size_t len1, size_t len2, size_t el_size, int (*cmp)(void* a, void* b), bool rev) {
 	void	*tmp1, *tmp2;
 	size_t	i, j, k = 0;
 
@@ -39,7 +39,7 @@ static int	_ft_merge(void* range, size_t len1, size_t len2, size_t el_size, int 
 	ft_memcpy(tmp2, range + len1 * el_size, len2 * el_size);
 
 	for (i = 0, j = 0; i < len1 && j < len2;) {
-		if ((*cmp)(tmp1 + i * el_size, tmp2 + j * el_size) < 0)// IF *tmp1 < *tmp2
+		if ((*cmp)(tmp1 + i * el_size, tmp2 + j * el_size) * (rev ? -1 : 1) < 0)// IF *tmp1 < *tmp2
 			ft_memcpy(range + (k++ * el_size), tmp1 + i++ * el_size, el_size);
 		else
 			ft_memcpy(range + (k++ * el_size), tmp2 + j++ * el_size, el_size);
@@ -66,8 +66,9 @@ static int	_ft_merge(void* range, size_t len1, size_t len2, size_t el_size, int 
 /// @param len number of element in the array
 /// @param el_size Size of each element in the array, in bytes
 /// @param cmp ```a``` and ```b``` are passed by address and not by copy
+/// @param rev reverse sort
 /// @return 
-int	_ft_merge_sort(void* range, size_t len, size_t el_size, int (*cmp)(void* a, void* b)) {
+int	_ft_merge_sort(void* range, size_t len, size_t el_size, int (*cmp)(void* a, void* b), bool rev) {
 	int	middle;
 
 	// If size == 1, return
@@ -75,11 +76,11 @@ int	_ft_merge_sort(void* range, size_t len, size_t el_size, int (*cmp)(void* a, 
 
 	// Divide array by 2
 	middle = len / 2;
-	if (_ft_merge_sort(range, len / 2 + (len % 2), el_size, cmp)) // index are put in first array
+	if (_ft_merge_sort(range, len / 2 + (len % 2), el_size, cmp, rev)) // index are put in first array
 		return (1);
-	if (_ft_merge_sort(range + (middle + len % 2) * el_size, len / 2, el_size, cmp))
+	if (_ft_merge_sort(range + (middle + len % 2) * el_size, len / 2, el_size, cmp, rev))
 		return (1);
-	if (_ft_merge(range, middle + (len % 2), len / 2, el_size, cmp))
+	if (_ft_merge(range, middle + (len % 2), len / 2, el_size, cmp, rev))
 		return (1);
 	return (0);
 }
