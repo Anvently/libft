@@ -81,6 +81,8 @@ int		ft_strcmp_rev(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strncmp_rev(const char *s1, const char *s2, size_t n);
 int		ft_stricmp(const char* s1, const char* s2);
+int		ft_strcmp_ignore(const char* s1, const char* s2, const char* ignore);
+int 	ft_stricmp_ignore(const char* s1, const char* s2, const char* ignore);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
@@ -216,8 +218,8 @@ void		ft_dump_vector(t_vector* vector, bool print_capacity);
 ---------------------- SORTING -----------------------------
 -----------------------------------------------------------------*/
 
-void	_ft_insertion_sort(void* range, size_t n, size_t el_size, int (*cmp)(void* a, void* b));
-# define ft_insertion_sort(range, n, cmp_func)(_ft_insertion_sort(range, n, sizeof(*range), cmp_func))
+void	_ft_insertion_sort(void* range, size_t n, size_t el_size, int (*cmp)(void* a, void* b), bool rev);
+# define ft_insertion_sort(range, n, cmp_func, rev)(_ft_insertion_sort(range, n, sizeof(*range), cmp_func, rev))
 
 int	_ft_merge_sort(void* range, size_t len, size_t el_size, int (*cmp)(void* a, void* b), bool rev);
 # define ft_merge_sort(range, n, cmp_func, rev)(_ft_merge_sort(range, n, sizeof(*range), cmp_func, rev))

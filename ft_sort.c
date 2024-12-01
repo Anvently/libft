@@ -5,14 +5,14 @@
 /// @param len 
 /// @param el_size 
 /// @param cmp ```a``` and ```b``` are passed by address and not by copy
-void	_ft_insertion_sort(void* range, size_t len, size_t el_size, int (*cmp)(void* a, void* b)) {
+void	_ft_insertion_sort(void* range, size_t len, size_t el_size, int (*cmp)(void* a, void* b), bool rev) {
 	size_t	sorted_len = 1;
 	size_t	i;
 
 	while (sorted_len < len) {
 		i = sorted_len;
 		while (1) {
-			if ((*cmp)(range + el_size * i, range + el_size * (i - 1)) < 0)
+			if ((*cmp)(range + el_size * i, range + el_size * (i - 1)) * (rev ? -1 : 1) < 0)
 				ft_memswap(range + el_size * i, range + el_size * (i - 1), el_size);
 			else
 				break;
