@@ -197,16 +197,16 @@ typedef struct {
 }		t_vector_struct;
 
 t_vector*	ft_vector_create(size_t type_size, size_t initial_capacity);
-bool		ft_vector_reserve(t_vector** vector_addr, size_t nbr_el);
-bool		ft_vector_pop(t_vector** vector_addr);
-bool		ft_vector_pop_range(t_vector** vector_addr, size_t n);
-bool		ft_vector_erase(t_vector** vector_addr, size_t pos);
-bool		ft_vector_erase_range(t_vector** vector_addr, size_t pos, size_t n);
-bool		ft_vector_push(t_vector** vector_addr, const void* data);
-bool		ft_vector_push_range(t_vector** vector_addr, const void* data, size_t n);
-bool		ft_vector_insert(t_vector** vector_addr, size_t pos, const void* data);
-bool		ft_vector_insert_range(t_vector** vector_addr, size_t pos, const void* data, size_t n);
-bool		ft_vector_resize(t_vector** vector_addr, size_t size);
+int			ft_vector_reserve(t_vector** vector_addr, size_t nbr_el);
+int			ft_vector_pop(t_vector** vector_addr);
+int			ft_vector_pop_range(t_vector** vector_addr, size_t n);
+int			ft_vector_erase(t_vector** vector_addr, size_t pos);
+int			ft_vector_erase_range(t_vector** vector_addr, size_t pos, size_t n);
+int			ft_vector_push(t_vector** vector_addr, const void* data);
+int			ft_vector_push_range(t_vector** vector_addr, const void* data, size_t n);
+int			ft_vector_insert(t_vector** vector_addr, size_t pos, const void* data);
+int			ft_vector_insert_range(t_vector** vector_addr, size_t pos, const void* data, size_t n);
+int			ft_vector_resize(t_vector** vector_addr, size_t size);
 
 void		ft_vector_free(t_vector** vector_addr);
 size_t		ft_vector_size(const t_vector* vector);
