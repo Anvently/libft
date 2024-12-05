@@ -85,6 +85,8 @@ int		ft_strcmp_ignore(const char* s1, const char* s2, const char* ignore);
 int 	ft_stricmp_ignore(const char* s1, const char* s2, const char* ignore);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
+bool	ft_isupper(int c);
+bool	ft_islower(int c);
 
 ///------------------------------ MEM --------------------------
 

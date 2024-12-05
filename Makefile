@@ -25,7 +25,7 @@ SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_strtod.c ft_dmax.c ft_max.c ft_getenv.c \
 				ft_strtoi.c ft_print_strs.c ft_strslen.c ft_strsslen.c ft_free_strss.c \
 				ft_strschr.c ft_free_strs.c \
-				ft_hexdump.c ft_vector.c ft_sort.c
+				ft_hexdump.c ft_vector.c ft_sort.c ft_case.c
 
 
 
