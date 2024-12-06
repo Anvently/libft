@@ -26,7 +26,7 @@ static void	print_chars(const char* buffer, size_t len) {
 /// @param addr 
 /// @param len 
 /// @param unit Size of each data to print in byte. Data are read in LSB first format.
-/// @param offset Specify a index to start reading from. Address are still printed
+/// @param offset Specify an offset (in bytes) to start reading from. Address are still printed
 /// relative to given addr. 
 /// @return ```1```  if sys error. 
 void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
@@ -38,10 +38,10 @@ void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
 	if (n_entry_line == 0)
 		n_entry_line = 1;
 	offset = n_entry_line * unit;
-	for (const void* data = (addr + start_from * unit); data && data < (addr + (start_from * unit) + (n * unit)); data += offset) {
+	for (const void* data = (addr + start_from); data && data < (addr + (start_from) + (n * unit)); data += offset) {
 		ft_printf("%08x", ((data - addr)));
 		write(1, " ", 1);
-		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + (start_from * unit) + (n * unit)); i++) {
+		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + (start_from) + (n * unit)); i++) {
 			if (i == (n_entry_line / 2))
 				write(1, "  ", 2);
 			else
@@ -64,7 +64,7 @@ void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
 /// @param addr 
 /// @param len 
 /// @param unit
-/// @param offset Specify a index to start reading from. Address are still printed
+/// @param offset Specify an offset (in bytes) to start reading from. Address are still printed
 /// relative to given addr. 
 /// @param len_zone Size of a zone (in number of elements) to colorize in a specific color
 /// @return ```1```  if sys error. 
@@ -78,10 +78,10 @@ void	ft_hexdump_color_zone(const void* addr, size_t n, size_t unit, size_t start
 	if (n_entry_line == 0)
 		n_entry_line = 1;
 	offset = n_entry_line * unit;
-	for (const void* data = (addr + start_from * unit); data && data < (addr + (start_from * unit) + (n * unit)); data += offset) {
+	for (const void* data = (addr + start_from); data && data < (addr + (start_from) + (n * unit)); data += offset) {
 		ft_printf("%08x", ((data - addr)));
 		write(1, " ", 1);
-		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + (start_from * unit) + (n * unit)); i++, y++) {
+		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + (start_from) + (n * unit)); i++, y++) {
 			if (i == (n_entry_line / 2))
 				write(1, "  ", 2);
 			else
