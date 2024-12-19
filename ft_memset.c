@@ -26,7 +26,7 @@ void	*ft_memset(void *s, int c, size_t n)
 		return (s);
 	for (offset = 0; offset < (n / sizeof(long)); offset += sizeof(long))
 		((long *) s)[offset / sizeof(long)] = *(long *)&value64[0];
-	for (offset;
+	for (;
 		offset < (sizeof(long) * (n / sizeof(long)) + (n % sizeof(long)));
 		offset += sizeof(unsigned char))
 		((unsigned char *) s)[offset] = c;

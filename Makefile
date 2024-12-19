@@ -1,7 +1,7 @@
 NAME		=	libft.a
 
 CC			=	gcc
-CFLAGS		=	-Wextra -g -O2 -fsanitize=address
+CFLAGS		=	-Wall -Wextra -g -O2 -fsanitize=address -fPIC
 
 SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_memchr.c ft_memcmp.c ft_memswap.c ft_strlen.c ft_strdup.c \
@@ -19,7 +19,7 @@ SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_lstpop_front.c ft_lstat.c \
 				ft_printf_args.c ft_printf_field.c	 ft_printf_parse_flags.c \
 				ft_printf.c ft_printf_field_util.c ft_printf_parse_index.c \
-				ft_printf_cast.c ft_printf_format.c	 ft_printf_printing.c \
+				ft_printf_format.c	 ft_printf_printing.c \
 				ft_printf_check.c ft_printf_format_util.c ft_printf_str_conversion.c \
 				ft_printf_error.c ft_gnl.c ft_error.c ft_abs.c ft_imax.c ft_atol.c ft_strtof.c \
 				ft_strtod.c ft_dmax.c ft_max.c ft_getenv.c \
@@ -31,15 +31,15 @@ SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 
 INCLUDES	=	./
 
-OBJS_FOLDER	=	objs
+OBJS_FOLDER	=	.objs
 OBJS		=	$(addprefix $(OBJS_FOLDER)/,$(SRCS:.c=.o))
 
 .PHONY		=	all clean fclean test re bonus so
 
 all: $(NAME)
 
-test: $(TARGET) main.c
-	$(CC) $(CFLAGS) -I$(INCLUDES) main.c -L. -lft
+test: $(TARGET) tests/main.c
+	$(CC) $(CFLAGS) -I$(INCLUDES) tests/main.c -L. -lft
 
 a.out: main.c $(NAME)
 	$(CC) $(CFLAGS) -I$(INCLUDES) main.c ${NAME}

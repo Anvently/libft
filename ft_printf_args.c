@@ -27,11 +27,6 @@ t_list	*new_argument_node(void)
 	return (node);
 }
 
-void	free_arg_req(void *arg_req)
-{
-	free(arg_req);
-}
-
 /// @brief Insert the given arg request in the list according to its index,
 /// check any conflict with a previous request.
 /// @param args_req Linked list of arg request. The list is sorted in
@@ -92,6 +87,20 @@ t_list	*register_arg_request(t_list **args_req, void *dest,
 	return (arg_node);
 }
 
+static void	retrieve_va_arg(void *dest, va_list *va_args, char type)
+{
+	if (type == 'c')
+		*((int *) dest) = va_arg(*va_args, int);
+	else if (type == 's')
+		*((char **) dest) = va_arg(*va_args, char *);
+	else if (ft_strchr("di", (int) type))
+		*((int *) dest) = va_arg(*va_args, int);
+	else if (ft_strchr("uxX", (int) type))
+		*((unsigned int *) dest) = va_arg(*va_args, unsigned int);
+	else if (ft_strchr("pty", (int) type))
+		*((unsigned long *) dest) = va_arg(*va_args, unsigned long);
+}
+
 /// @brief Read every argument of ```va_args``` and assign every
 /// request in ```args_req``` to its destination variable. Check for
 /// any out of reach or unused index.
@@ -100,29 +109,22 @@ t_list	*register_arg_request(t_list **args_req, void *dest,
 /// @return
 int	retrieve_arguments(t_list *args_req, va_list *va_args)
 {
-	int			i;
-	t_arg_req	*req;
-	void		*value;
+	int				i;
+	t_arg_req		*req;
+	void*			value;
 
 	i = 0;
-	value = NULL;
 	while (args_req)
 	{
 		req = (t_arg_req *) args_req->content;
 		if (req->index - i > 1)
-		{
-			free(value);
 			return (arg_index_error(2, i + 1));
-		}
-		else if (req->index - i == 1)
-		{
+		else if (req->index - i == 1) {
+			retrieve_va_arg(&value, va_args, req->type);
 			i++;
-			free(value);
-			value = get_arg_value(va_args, req->type);
 		}
-		cast_to_dest(req->dest, value, req->type);
+		*((void**)req->dest) = value;
 		args_req = args_req->next;
 	}
-	free(value);
 	return (1);
 }

@@ -30,7 +30,7 @@ static void	print_chars(const char* buffer, size_t len) {
 /// relative to given addr. 
 /// @return ```1```  if sys error. 
 void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
-	int					n_entry_line, offset, i;
+	size_t				n_entry_line, offset, i;
 	char				spaces[64] = {' '};
 
 	ft_memset(&spaces, ' ', 64);
@@ -69,7 +69,7 @@ void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
 /// @param len_zone Size of a zone (in number of elements) to colorize in a specific color
 /// @return ```1```  if sys error. 
 void	ft_hexdump_color_zone(const void* addr, size_t n, size_t unit, size_t start_from, size_t len_zone) {
-	int					n_entry_line, offset, i, y = 0;
+	size_t				n_entry_line, offset, i, y = 0;
 	char				spaces[64] = {' '};
 	static const char*	colors[6] = {TERM_CL_BLUE, TERM_CL_CYAN, TERM_CL_GREEN, TERM_CL_MAGENTA, TERM_CL_RED, TERM_CL_YELLOW};
 

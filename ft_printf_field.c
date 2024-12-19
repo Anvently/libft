@@ -105,6 +105,6 @@ t_list	*build_fields(char *str, va_list *va_args)
 		if (!retrieve_arguments(args_req, va_args))
 			ft_lstclear(&fields, &free_field);
 	}
-	ft_lstclear(&args_req, &free_arg_req);
+	ft_lstclear(&args_req, &free);
 	return (fields);
 }

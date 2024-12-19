@@ -23,31 +23,31 @@ static int	_vector_realloc(t_vector** vector_addr, t_vector_header* header, size
 	return (0);
 }
 
-/// @brief Realloc vector by multiplying its capacity by 2
-/// If reallocation fails, vector IS NOT freed.
-/// @param vector_addr 
-/// @return ```1``` if allocation failed
-static int	_vector_expand(t_vector** vector_addr) {
-	t_vector_header*	header;
+// /// @brief Realloc vector by multiplying its capacity by 2
+// /// If reallocation fails, vector IS NOT freed.
+// /// @param vector_addr 
+// /// @return ```1``` if allocation failed
+// static int	_vector_expand(t_vector** vector_addr) {
+// 	t_vector_header*	header;
 
-	if (!*vector_addr)
-		return (1);
-	header = _get_vector_header(*vector_addr);
-	return (_vector_realloc(vector_addr, header, (header->capacity ? header->capacity * 2 : 2)));
-}
+// 	if (!*vector_addr)
+// 		return (1);
+// 	header = _get_vector_header(*vector_addr);
+// 	return (_vector_realloc(vector_addr, header, (header->capacity ? header->capacity * 2 : 2)));
+// }
 
-/// @brief Realloc vector by dividing its capacity by 2
-/// If reallocation fails, vector IS NOT freed.
-/// @param vector_addr 
-/// @return ```1``` if allocation failed
-static int	_vector_shrink(t_vector** vector_addr) {
-	t_vector_header*	header;
+// /// @brief Realloc vector by dividing its capacity by 2
+// /// If reallocation fails, vector IS NOT freed.
+// /// @param vector_addr 
+// /// @return ```1``` if allocation failed
+// static int	_vector_shrink(t_vector** vector_addr) {
+// 	t_vector_header*	header;
 
-	if (!*vector_addr)
-		return (1);
-	header = _get_vector_header(*vector_addr);
-	return (_vector_realloc(vector_addr, header, (header->capacity ? header->capacity / 2 : 0)));
-}
+// 	if (!*vector_addr)
+// 		return (1);
+// 	header = _get_vector_header(*vector_addr);
+// 	return (_vector_realloc(vector_addr, header, (header->capacity ? header->capacity / 2 : 0)));
+// }
 
 static inline int	_has_capacity(t_vector_header* header) {
 	return (header->capacity > header->len);

@@ -310,11 +310,11 @@ typedef struct s_flags
 ///* NULL if value is not assigned yet (case of %).
 typedef struct s_field
 {
-	t_flags	flags;
-	size_t	width;
-	int		precision;
-	char	type;
-	void	*value;
+	t_flags			flags;
+	size_t			width;
+	int				precision;
+	char			type;
+	void*			value; //Should be able to store all type
 }			t_field;
 
 //Structure util
@@ -344,15 +344,14 @@ char	*parse_conversion_type(char *str, t_field *field);
 
 typedef struct s_arg_req
 {
-	size_t	index;
-	void	*dest;
-	char	type;
+	size_t			index;
+	void*			dest;
+	char			type;
 }			t_arg_req;
 
 //Struct util
 
 t_list	*new_argument_node(void);
-void	free_arg_req(void *arg_req);
 t_list	*insert_arg_req(t_list **args_req, t_list *arg_node);
 
 //Args retrieving
@@ -367,12 +366,6 @@ bool	check_index_format(int new_format, int given_index, char *parsing);
 bool	check_type_conflict(t_arg_req *node1, t_arg_req *node2);
 bool	check_flag_conflict(t_field *field);
 bool	check_fields(t_list *fields);
-
-//Casting
-
-void	*alloc_arg_value(char type);
-void	*get_arg_value(va_list *va_args, char type);
-void	cast_to_dest(void *dest, void *value, char type);
 
 //Printing functions
 
