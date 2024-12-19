@@ -83,6 +83,10 @@ static int	ft_printf_va(int fd, const char* str, va_list* args) {
 ///* ```X``` print a number in hexadecimal using uppercase char
 ///* ```y``` print unsigned long decimal number
 ///* ```%``` print '%' sign
+///* ```ld``` print long int
+///* ```lu``` print long unsigned int
+///* ```lx``` print long int as hex
+///* ```lx``` print long unsigned int as hex
 ///* ``` Varg ```
 int	ft_printf(const char *str, ...)
 {

@@ -120,7 +120,31 @@ char	*parse_conversion_type(char *str, t_field *field)
 {
 	if (!str)
 		return (NULL);
-	if (ft_strchr("cspdiuxXy", str[0]) && str[0])
+	if (str[0] == 'l') {
+		switch (str[1])
+		{
+			case 'd':
+				field->type = '0';
+				break;
+
+			case 'u':
+				field->type = '1';
+				break;
+
+			case 'x':
+				field->type = '2';
+				break;
+
+			case 'X':
+				field->type = '3';
+				break;
+			
+			default:
+				return (format_error(3, "conversion type"));
+		}
+		return (str + 2);
+	}
+	else if (ft_strchr("cspdiuxXy", str[0]) && str[0])
 		field->type = str[0];
 	else
 		return (format_error(3, "conversion type"));

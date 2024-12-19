@@ -20,13 +20,13 @@
 /// ```NULL``` if allocation error.
 char	*format_str(t_field *field, char *str)
 {
-	if (ft_strchr("sdiuxXy", field->type) && field->precision >= 0
+	if (ft_strchr("sdiuxX0123", field->type) && field->precision >= 0
 		&& field->flags.precision)
 		str = format_precision(field, str);
-	if (field->flags.alternate_form && ft_strchr("xX", field->type)
+	if (field->flags.alternate_form && ft_strchr("xX23", field->type)
 		&& (unsigned long) field->value != 0)
 		str = format_alt_form(field, str);
-	if (ft_strchr("di", field->type) && str[0] != '-'
+	if (ft_strchr("di0", field->type) && str[0] != '-'
 		&& (field->flags.force_sign || field->flags.sign_blank))
 		str = format_sign(field, str);
 	if (ft_strlen(str) < field->width)
@@ -81,7 +81,7 @@ char	*format_alt_form(t_field *field, char *str)
 {
 	char	*buffer;
 
-	if (field->type == 'x')
+	if (field->type == 'x' || field->type == '2')
 		buffer = ft_strjoin("0x", str);
 	else
 		buffer = ft_strjoin("0X", str);
@@ -125,9 +125,9 @@ char	*format_width(t_field *field, char *str)
 
 	len_str = ft_strlen(str);
 	if (field->flags.precision && field->precision <= (int) field->width
-		&& ft_strchr("diuxXy", field->type))
+		&& ft_strchr("diuxX0123", field->type))
 		field->flags.zero_padding = false;
-	if (field->flags.zero_padding && ft_strchr("diuxXy", field->type))
+	if (field->flags.zero_padding && ft_strchr("diuxX0123", field->type))
 	{
 		if (str[0] == '-' || str[0] == '+')
 			buffer = insert_n_char(str, 1, field->width - len_str, '0');

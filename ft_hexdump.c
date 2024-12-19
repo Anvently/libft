@@ -32,6 +32,7 @@ static void	print_chars(const char* buffer, size_t len) {
 void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
 	size_t				n_entry_line, offset, i;
 	char				spaces[64] = {' '};
+	const char*			address_format = (start_from + (n * unit) > 0xFFFFFFFF ? "%016lx" : "%08x");
 
 	ft_memset(&spaces, ' ', 64);
 	n_entry_line = 16 / unit;
@@ -39,7 +40,7 @@ void	ft_hexdump(const void* addr, size_t n, size_t unit, size_t start_from) {
 		n_entry_line = 1;
 	offset = n_entry_line * unit;
 	for (const void* data = (addr + start_from); data && data < (addr + (start_from) + (n * unit)); data += offset) {
-		ft_printf("%08x", ((data - addr)));
+		ft_printf(address_format, ((data - addr)));
 		write(1, " ", 1);
 		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + (start_from) + (n * unit)); i++) {
 			if (i == (n_entry_line / 2))
@@ -72,6 +73,7 @@ void	ft_hexdump_color_zone(const void* addr, size_t n, size_t unit, size_t start
 	size_t				n_entry_line, offset, i, y = 0;
 	char				spaces[64] = {' '};
 	static const char*	colors[6] = {TERM_CL_BLUE, TERM_CL_CYAN, TERM_CL_GREEN, TERM_CL_MAGENTA, TERM_CL_RED, TERM_CL_YELLOW};
+	const char*			address_format = (start_from + (n * unit) > 0xFFFFFFFF ? "%016lx" : "%08x");
 
 	ft_memset(&spaces, ' ', 64);
 	n_entry_line = 16 / unit;
@@ -79,7 +81,7 @@ void	ft_hexdump_color_zone(const void* addr, size_t n, size_t unit, size_t start
 		n_entry_line = 1;
 	offset = n_entry_line * unit;
 	for (const void* data = (addr + start_from); data && data < (addr + (start_from) + (n * unit)); data += offset) {
-		ft_printf("%08x", ((data - addr)));
+		ft_printf(address_format, ((data - addr)));
 		write(1, " ", 1);
 		for (i = 0; i < n_entry_line && (data + (i * unit)) < (addr + (start_from) + (n * unit)); i++, y++) {
 			if (i == (n_entry_line / 2))

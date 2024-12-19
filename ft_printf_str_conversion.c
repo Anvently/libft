@@ -48,11 +48,15 @@ char	*str_to_str(char *str)
 	return (ft_strdup(str));
 }
 
-char	*hexa_to_str(unsigned int nbr, char type)
+char	*hexa_to_str(unsigned long nbr, char type)
 {
 	if (type == 'x')
-		return (ft_ultoa_base((unsigned long) nbr, "0123456789abcdef"));
+		return (ft_ultoa_base((unsigned int) nbr, "0123456789abcdef"));
 	else if (type == 'X')
+		return (ft_ultoa_base((unsigned int) nbr, "0123456789ABCDEF"));
+	if (type == '2')
+		return (ft_ultoa_base((unsigned long) nbr, "0123456789abcdef"));
+	else if (type == '3')
 		return (ft_ultoa_base((unsigned long) nbr, "0123456789ABCDEF"));
 	return (NULL);
 }

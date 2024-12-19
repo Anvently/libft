@@ -87,7 +87,7 @@ t_list	*register_arg_request(t_list **args_req, void *dest,
 	return (arg_node);
 }
 
-static void	retrieve_va_arg(void *dest, va_list *va_args, char type)
+static void	retrieve_va_arg(void **dest, va_list *va_args, char type)
 {
 	if (type == 'c')
 		*((int *) dest) = va_arg(*va_args, int);
@@ -97,8 +97,10 @@ static void	retrieve_va_arg(void *dest, va_list *va_args, char type)
 		*((int *) dest) = va_arg(*va_args, int);
 	else if (ft_strchr("uxX", (int) type))
 		*((unsigned int *) dest) = va_arg(*va_args, unsigned int);
-	else if (ft_strchr("pty", (int) type))
+	else if (ft_strchr("pty123", (int) type))
 		*((unsigned long *) dest) = va_arg(*va_args, unsigned long);
+	else if (ft_strchr("0", (int) type))
+		*((long *) dest) = va_arg(*va_args, long);
 }
 
 /// @brief Read every argument of ```va_args``` and assign every
@@ -111,7 +113,7 @@ int	retrieve_arguments(t_list *args_req, va_list *va_args)
 {
 	int				i;
 	t_arg_req		*req;
-	void*			value;
+	void*			value = NULL;
 
 	i = 0;
 	while (args_req)

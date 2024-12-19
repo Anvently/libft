@@ -118,6 +118,7 @@ int		ft_strtof(char *str, float *dest, char **ptr);
 int		ft_strtod(char *str, double *dest, char **ptr);
 char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
+char	*ft_ltoa(long n);
 char	*ft_ultoa(unsigned long n);
 char	*ft_ultoa_base(unsigned long n, char *base);
 unsigned int	ft_putunbr_buffer(unsigned long nbr, char* buffer, unsigned int size);
@@ -303,6 +304,9 @@ typedef struct s_flags
 ///* ```x``` print a number in hexadecimal using lowercase char
 ///* ```X``` print a number in hexadecimal using uppercase char
 ///* ```%``` print '%' sign
+///* ```ld``` long int
+///* ```ls``` long signed int
+///* ```lu``` long unsigned int
 ///*
 ///* ### Value
 ///*
@@ -313,9 +317,11 @@ typedef struct s_field
 	t_flags			flags;
 	size_t			width;
 	int				precision;
-	char			type;
+	char			type; //0 => ld, 1 => lu, 2 => lx, 3 => lX
 	void*			value; //Should be able to store all type
 }			t_field;
+
+// #define FT_PRINTF_TYPE
 
 //Structure util
 
@@ -379,7 +385,7 @@ char	*get_str_value(t_field *field);
 char	*char_to_str(char c);
 char	*address_to_str(unsigned long addr);
 char	*str_to_str(char *str);
-char	*hexa_to_str(unsigned int nbr, char type);
+char	*hexa_to_str(unsigned long nbr, char type);
 
 //Formatting
 

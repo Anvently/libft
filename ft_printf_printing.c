@@ -60,9 +60,11 @@ char	*get_str_value(t_field *field)
 		return (ft_itoa((unsigned long) field->value));
 	else if (field->type == 'u')
 		return (ft_uitoa((unsigned long)field->value));
-	else if (field->type == 'y')
+	else if (field->type == '0')
+		return (ft_ltoa((long)field->value));
+	else if (field->type == '1')
 		return (ft_ultoa((unsigned long)field->value));
-	else if (ft_strchr("xX", field->type))
+	else if (ft_strchr("xX23", field->type))
 		return (hexa_to_str((unsigned long) field->value, field->type));
 	return (NULL);
 }
