@@ -144,7 +144,7 @@ char	*parse_conversion_type(char *str, t_field *field)
 		}
 		return (str + 2);
 	}
-	else if (ft_strchr("cspdiuxXy", str[0]) && str[0])
+	else if (ft_strchr("cspdiuxX", str[0]) && str[0])
 		field->type = str[0];
 	else
 		return (format_error(3, "conversion type"));
