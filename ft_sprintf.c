@@ -139,8 +139,12 @@ static size_t	parse_format(char* buffer, size_t size, const char* format, va_lis
 	return (len);
 }
 
+
+
+
 /// @brief Static printf implementation to format string inside buffers without
-/// allocation. Doesn't raise any error. Null terminate the buffer at the end
+/// allocation. Doesn't raise any error. Null terminate the buffer at the end.
+/// Handles %d, %i, %u, %x, %X, %s, %c, %p, %ld, %lu, %li, %lx, %lX, %%
 /// @warning Flag, width and precision not implemented
 /// @param buffer buffer to write into
 /// @param size of the buffer 
@@ -158,3 +162,23 @@ size_t	ft_sprintf(char* buffer, size_t size, const char* format, ...) {
 	buffer[nwrite] = '\0';
 	return (nwrite);
 }
+
+/// @brief Static implementation of dprintf without any allocation.
+/// Handles %d, %i, %u, %x, %X, %s, %c, %p, %ld, %lu, %li, %lx, %lX, %%
+/// @note Size of static buffer depends of ```BUFFER_SIZE``` define.
+/// @param fd 
+/// @param format 
+void	ft_sdprintf(int fd, const char* format, ...) {
+	char	buffer[BUFFER_SIZE];
+	size_t	nwrite;
+	va_list	args;
+
+	if (format == NULL || fd < 0)
+		return;
+	va_start(args, format);
+	nwrite = parse_format(&buffer[0], BUFFER_SIZE, format, args);
+	va_end(args);
+	buffer[nwrite] = '\0';
+	write(fd, buffer, nwrite);
+}
+

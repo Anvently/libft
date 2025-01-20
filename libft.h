@@ -240,6 +240,7 @@ char	*ft_gnl(int fd);
 -----------------------------------------------------------------*/
 
 size_t	ft_sprintf(char* buffer, size_t size, const char* format, ...);
+void	ft_sdprintf(int fd, const char* format, ...);
 int		ft_printf(const char *str, ...);
 int		ft_dprintf(int fd, const char *str, ...);
 
