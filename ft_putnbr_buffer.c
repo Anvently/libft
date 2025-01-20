@@ -28,6 +28,7 @@ size_t	ft_putnbr_buffer(long nbr, char* buffer, size_t size) {
 
 	if (nbr < 0 && size > 0) {
 		buffer[nwrite++] = '-';
+		buffer++;
 		nbr = -nbr;
 	}
 	put_nbr(&buffer, nbr, &nwrite, size);

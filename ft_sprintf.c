@@ -8,7 +8,7 @@ static size_t	put_str_buffer(char* buffer, size_t buffer_size, char* str) {
 		str = "(null)";
 	s_len = ft_strlen(str);
 	ft_strlcpy(buffer, str, buffer_size);
-	return (s_len + 1 > buffer_size ? s_len - buffer_size - 1 : s_len);
+	return (s_len + 1 > buffer_size ? buffer_size - 1 : s_len);
 }
 
 static size_t	put_ptr_str(char* buffer, size_t size, void* ptr) {
@@ -18,14 +18,13 @@ static size_t	put_ptr_str(char* buffer, size_t size, void* ptr) {
 	nwrite = put_str_buffer(buffer, size, "0x");
 	if (nwrite != 2)
 		return (nwrite);
-	nwrite += ft_putunbr_base_buffer(buffer, size - 2, (size_t)ptr, "0123456789abcdef");
+	nwrite += ft_putunbr_base_buffer((size_t)ptr, buffer + 2, size - 2, "0123456789abcdef");
 	return (nwrite);
 }
 
 static size_t	parse_format(char* buffer, size_t size, const char* format, va_list args) {
 	size_t	len = 0;
 	size_t	nwrite;
-	void*	s;
 
 	while (*format && len + 1 < size) {
 		if (*format == '%')
@@ -86,7 +85,7 @@ static size_t	parse_format(char* buffer, size_t size, const char* format, va_lis
 					break;
 
 				case 'l':
-					switch ((*format + 2))
+					switch (*(format + 2))
 					{
 						case 'd':
 							nwrite = ft_putnbr_buffer(va_arg(args, int), buffer + len, size - len);
@@ -118,6 +117,7 @@ static size_t	parse_format(char* buffer, size_t size, const char* format, va_lis
 							format += 2;
 							break;
 					}
+					break;
 
 				default:
 					buffer[len] = '%';
@@ -150,7 +150,7 @@ size_t	ft_sprintf(char* buffer, size_t size, const char* format, ...) {
 	va_list	args;
 	size_t	nwrite;
 
-	if (buffer = NULL || format == NULL || size == 0)
+	if (buffer == NULL || format == NULL || size == 0)
 		return (0);
 	va_start(args, format);
 	nwrite = parse_format(buffer, size, format, args);
