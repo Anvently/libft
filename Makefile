@@ -3,12 +3,20 @@ NAME		=	libft.a
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -g3 -fPIC
 
-ifeq ($(ARCHITECTURE), 32)
-	CFLAGS += -m32 -D__ARCH_TARGET=$(ARCHITECTURE)
-else ifeq ($(ARCHITECTURE), 64)
-	CFLAGS += -m64 -D__ARCH_TARGET=$(ARCHITECTURE)
+ifeq ($(ARCH_TYPE), 32)
+	CFLAGS += -m32 -D__ARCH_TYPE=$(ARCH_TYPE)
+else ifeq ($(ARCH_TYPE), 64)
+	CFLAGS += -m64 -D__ARCH_TYPE=$(ARCH_TYPE)
 else
-	CFLAGS += -m64 -D__ARCH_TARGET=64
+	CFLAGS += -m64 -D__ARCH_TYPE=64
+endif
+
+ifeq ($(VALGRIND),)
+	CFLAGS += -fsanitize=address
+endif
+
+ifneq ($(OPTI),)
+	CFLAGS += -02
 endif
 
 SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
@@ -33,7 +41,8 @@ SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_strtod.c ft_dmax.c ft_max.c ft_getenv.c \
 				ft_strtoi.c ft_print_strs.c ft_strslen.c ft_strsslen.c ft_free_strss.c \
 				ft_strschr.c ft_free_strs.c \
-				ft_hexdump.c ft_vector.c ft_sort.c ft_case.c ft_sprintf.c
+				ft_hexdump.c ft_vector.c ft_sort.c ft_case.c ft_sprintf.c \
+				ft_options.c
 
 
 INCLUDES	=	./

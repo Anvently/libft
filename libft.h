@@ -27,6 +27,16 @@
 #  define BUFFER_SIZE 1000
 # endif
 
+# ifndef __FT_ERRORS
+#  define __FT_ERRORS
+enum	E_ERRORS {
+		ERROR_FATAL = -1,
+		SUCCESS = 0,
+		ERROR_SYS = 1,
+		ERROR_INPUT = 2
+};
+# endif
+
 #define TERM_CL_RED "\033[31m"
 #define TERM_CL_GREEN "\033[32m"
 #define TERM_CL_YELLOW "\033[33m"
@@ -399,5 +409,30 @@ char	*format_alt_form(t_field *field, char *str);
 char	*format_sign(t_field *field, char *str);
 char	*format_width(t_field *field, char *str);
 char	*insert_n_char(char *str, int start, int n, char c);
+
+/*--------------------------------------------------------------
+---------------------- FT_OPTIONS -----------------------------
+-----------------------------------------------------------------*/
+
+// A data structure that will be given to the handler, containing for example the list of enable
+// flags
+typedef struct s_options t_options;
+
+enum	ARG_TYPE {
+			ARG_NONE,
+			ARG_OPTIONNAL,
+			ARG_REQUIRED
+};
+
+typedef struct s_option_flag {
+	char			short_id;
+	char*			long_id;
+	enum ARG_TYPE	arg;
+	int				(*handler)(t_options*, char*);
+} t_opt_flag;
+
+int	ft_options_retrieve(int nbr, char** args, t_options* options, unsigned int* dest_nbr_args);
+int	ft_options_err_invalid_argument(const char* option, const char* arg, const char*** valids);
+int	ft_options_err_ambiguous_argument(const char* option, const char* arg, const char*** valids);
 
 #endif
