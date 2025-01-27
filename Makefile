@@ -16,7 +16,7 @@ ifeq ($(VALGRIND),)
 endif
 
 ifneq ($(OPTI),)
-	CFLAGS += -02
+	CFLAGS += -O2
 endif
 
 SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
