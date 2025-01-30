@@ -42,7 +42,7 @@ SRCS		=	ft_memset.c ft_bzero.c ft_calloc.c ft_memcpy.c ft_memmove.c \
 				ft_strtoi.c ft_print_strs.c ft_strslen.c ft_strsslen.c ft_free_strss.c \
 				ft_strschr.c ft_free_strs.c \
 				ft_hexdump.c ft_vector.c ft_sort.c ft_case.c ft_sprintf.c \
-				ft_options.c
+				ft_options.c ft_sbtree.c
 
 
 INCLUDES	=	./
@@ -54,7 +54,7 @@ OBJS		=	$(addprefix $(OBJS_FOLDER)/,$(SRCS:.c=.o))
 
 all: $(NAME)
 
-test: $(TARGET) $(OBJS) tests/main.c
+test: $(NAME) tests/main.c
 	$(CC) $(CFLAGS) -I$(INCLUDES) tests/main.c -L. -lft
 
 a.out: main.c $(NAME)

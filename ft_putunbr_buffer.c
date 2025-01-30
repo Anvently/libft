@@ -22,7 +22,7 @@ static void	put_nbr_base(char **s, unsigned long nb, size_t* nwrite, size_t size
 {
 	if (*nwrite >= size)
 		return;
-	if (nb <= len_base)
+	if (nb <= len_base - 1)
 	{
 		**s = base[nb];
 		*s = *s + 1;
