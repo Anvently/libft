@@ -241,13 +241,14 @@ typedef struct s_sbtree {
 }	t_sbtree;
 
 int			ft_sbtree_insert(t_sbtree** parent, const void* data, int (*cmp)(const void*, const void*));
-int			ft_sbtree_remove(t_sbtree** root, t_sbtree*	 node, int (*cmp)(void*, void*));
+int			ft_sbtree_remove(t_sbtree** root, const void* data, int (*cmp)(const void*, const void*), void (*free_fun)(void *));
 void		ft_sbtree_clear(t_sbtree* root, void (*free_func)(void*));
 
 size_t		ft_sbtree_size(const t_sbtree* root);
 size_t		ft_sbtree_height(const t_sbtree* root, int height);
 int			ft_sbtree_shortest(const t_sbtree* root);
 t_sbtree*	ft_sbtree_find(const t_sbtree* root, const void* data, int (*cmp)(const void*, const void*));
+bool		ft_sbtree_check_consistency(t_sbtree* root, int (*cmp)(const void*, const void*));
 
 #define		ft_sbtree_print(tree) _ft_sbtree_print(tree, 0, NULL)
 #define		ft_sbtree_print_fun(tree, fun) _ft_sbtree_print(tree, 0, fun)

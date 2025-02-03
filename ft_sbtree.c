@@ -65,10 +65,142 @@ int	ft_sbtree_insert(t_sbtree** parent, const void* data, int (*cmp)(const void*
 		return (1);
 }
 
+bool	ft_sbtree_check_consistency(t_sbtree* root, int (*cmp)(const void*, const void*)) {
+	if (root == NULL)
+		return (true);
+	if (cmp == NULL)
+		cmp = &default_cmp;
+	if (root->right) {
+		if ((*cmp)(root->data, root->right->data) > 0) {
+			ft_sdprintf(1, "failed at %p vs %p\n", root->data, root->right->data);
+			return (false);
+		}
+		if (ft_sbtree_check_consistency(root->right, cmp) == false)
+			return (false);
+	}
+	if (root->left) {
+		if ((*cmp)(root->data, root->left->data) < 0) {
+			ft_sdprintf(1, "failed at %p vs %p\n", root->data, root->right->data);
+			return (false);
+		}
+		if (ft_sbtree_check_consistency(root->left, cmp) == false)
+			return (false);
+	}
+	return (true);
+}
+
+/// @brief Recursively replace parent with the child having the longest branch
+/// @param parent 
+__attribute_maybe_unused__
+static void	ft_sbtree_rotate_longest(t_sbtree** parent) {
+		// t_sbtree*	orphan;
+		t_sbtree*	node;
+
+		if (*parent == NULL)
+			return;
+		node = *parent;
+		if (ft_sbtree_shortest(*parent) <= 0) { //Left rotate
+			// orphan = (*parent)->left;
+			*parent = (*parent)->right;
+			ft_sbtree_rotate_longest(&node->right);
+			if (*parent) {
+				(*parent)->left = node->left;
+				(*parent)->right = node->right;
+			}
+		} else { //Right rotate
+			// orphan = (*parent)->right;
+			*parent = (*parent)->left;
+			ft_sbtree_rotate_longest(&node->left);
+			if (*parent) {
+				(*parent)->right = node->right;
+				(*parent)->left = node->left;
+			}
+		}
+}
+
+t_sbtree**	ft_sbtree_min(t_sbtree** root) {
+	while ((*root)->left)
+		return (ft_sbtree_min(&(*root)->left));
+	return (root);
+}
+
+/// @brief Recursively remove a given node. 
+/// @param node_ptr 
+/// @return The node that was removed, that can be passed to free.
+/// Same as ```*node_ptr```
+t_sbtree*	ft_sbtree_pop_node(t_sbtree** node_ptr) {
+	t_sbtree	*tmp, *node;
+	t_sbtree**	upper_bound;
+
+	node = *node_ptr;
+	if (node == NULL)
+		return (NULL);
+	if (node->left && node->right) {
+		upper_bound = ft_sbtree_min(&(*node_ptr)->right);
+		if (&(*node_ptr)->right == upper_bound) { // rotate adjacent node
+			tmp = (*node_ptr)->left;
+			(*node_ptr)->left = (*upper_bound)->left;
+			(*upper_bound)->left = tmp;
+			tmp = *upper_bound;
+			(*node_ptr)->right = (*upper_bound)->right;
+			tmp->right = *node_ptr;
+			*node_ptr = tmp;
+			ft_sbtree_pop_node(&(*node_ptr)->right);
+		} else { 
+			tmp = (*upper_bound)->left;
+			(*upper_bound)->left = (*node_ptr)->left;
+			(*node_ptr)->left = tmp;
+			tmp = (*upper_bound)->right;
+			(*upper_bound)->right = (*node_ptr)->right;
+			(*node_ptr)->right = tmp;
+			tmp = (*node_ptr);
+			*node_ptr = *upper_bound;
+			*upper_bound = node;
+			ft_sbtree_pop_node(upper_bound);
+		}
+	}
+	else if (node->left)
+		*node_ptr = node->left;
+	else if (node->right)
+		*node_ptr = node->right;
+	else
+		*node_ptr = NULL;
+	return (node);
+}
+
+/// @brief Remove node containing ```data``` if found.
+/// @param parent 
+/// @param node 
+/// @param cmp 
+/// @return ```0``` if a node was deleted. ```1``` if no node containing
+//// ```data``` was found.
+int	ft_sbtree_remove(t_sbtree** root, const void* data, int (*cmp)(const void*, const void*), void (*free_fun)(void *)) {
+	t_sbtree*	node;
+	int			diff;
+
+	if (cmp == NULL)
+		cmp = &default_cmp;
+	if (*root == NULL)
+		return (1);
+	diff = (*cmp)((*root)->data, data);
+	if (diff == 0) {
+		node = ft_sbtree_pop_node(root);
+		if (free_fun)
+			(*free_fun)(node->data);
+		free(node);
+		return (0);
+	} else if (diff < 0)
+		return (ft_sbtree_remove(&(*root)->right, data, cmp, free_fun));
+	else if (diff > 0)
+		return (ft_sbtree_remove(&(*root)->left, data, cmp, free_fun));
+	return (0);
+}
 
 void	_ft_sbtree_print(const t_sbtree* tree, int level, void (*fun)(const void*)) {
 	static char			padding[128];
 
+	if (tree == NULL)
+		return;
 	if (level == 0)
 		ft_memset(&padding[0], 0, sizeof(padding));
 	_ft_sbtree_print_call(fun, tree->data);
