@@ -248,11 +248,13 @@ size_t		ft_sbtree_size(const t_sbtree* root);
 size_t		ft_sbtree_height(const t_sbtree* root, int height);
 int			ft_sbtree_shortest(const t_sbtree* root);
 t_sbtree*	ft_sbtree_find(const t_sbtree* root, const void* data, int (*cmp)(const void*, const void*));
+t_sbtree*	ft_sbtree_lower_bound(const t_sbtree* root, const void* data, int (*cmp)(const void*, const void*));
+t_sbtree*	ft_sbtree_upper_bound(const t_sbtree* root, const void* data, int (*cmp)(const void*, const void*));
 bool		ft_sbtree_check_consistency(t_sbtree* root, int (*cmp)(const void*, const void*));
+
 
 #define		ft_sbtree_print(tree) _ft_sbtree_print(tree, 0, NULL)
 #define		ft_sbtree_print_fun(tree, fun) _ft_sbtree_print(tree, 0, fun)
-#define		_ft_sbtree_print_call(fun, data) ((fun) ? ((fun)(data)) : ft_sdprintf(1, "%p\n", (data)))
 void		_ft_sbtree_print(const t_sbtree* tree, int level, void (*print_func)(const void*));
 
 /*--------------------------------------------------------------

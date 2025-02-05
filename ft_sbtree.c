@@ -196,6 +196,8 @@ int	ft_sbtree_remove(t_sbtree** root, const void* data, int (*cmp)(const void*, 
 	return (0);
 }
 
+#define		_ft_sbtree_print_call(fun, data) ((fun) ? ((fun)(data)) : ft_sdprintf(1, "%p\n", (data)))
+
 void	_ft_sbtree_print(const t_sbtree* tree, int level, void (*fun)(const void*)) {
 	static char			padding[128];
 
