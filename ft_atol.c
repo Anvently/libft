@@ -17,7 +17,7 @@
 /// Does not check for overflow
 /// @param nptr String to convert
 /// @return Convert value or 0 if error.
-int	ft_atol(const char *nptr)
+long	ft_atol(const char *nptr)
 {
 	size_t	i;
 	int		sign;

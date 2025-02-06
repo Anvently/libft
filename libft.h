@@ -122,10 +122,11 @@ char	*ft_getenv(char *var, char **env);
 ///---------------------- TYPE CONVERSION -----------------------
 
 int		ft_atoi(const char *nptr);
-int		ft_atol(const char *nptr);
+long	ft_atol(const char *nptr);
 int		ft_strtoi(const char *str, int *dest);
 int		ft_strtof(char *str, float *dest, char **ptr);
 int		ft_strtod(char *str, double *dest, char **ptr);
+int		ft_strtoul_base(const char* str, unsigned long* dest, const char** ptr, const char* base);
 char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
 char	*ft_ltoa(long n);
