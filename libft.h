@@ -225,6 +225,7 @@ int			ft_vector_push_range(t_vector** vector_addr, const void* data, size_t n);
 int			ft_vector_insert(t_vector** vector_addr, size_t pos, const void* data);
 int			ft_vector_insert_range(t_vector** vector_addr, size_t pos, const void* data, size_t n);
 int			ft_vector_resize(t_vector** vector_addr, size_t size);
+void		ft_vector_iter(t_vector *vector, void (*f)(void *));
 
 void		ft_vector_free(t_vector** vector_addr);
 size_t		ft_vector_size(const t_vector* vector);

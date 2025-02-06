@@ -234,6 +234,18 @@ int		ft_vector_resize(t_vector** vector_addr, size_t size) {
 	return (0);
 }
 
+void	ft_vector_iter(t_vector *vector, void (*f)(void *))
+{
+	t_vector_header	*header;
+	header = _get_vector_header(vector);
+	if (!header)
+		return;
+	for (size_t i = 0; i < header->len; i++)
+	{
+		f(((char *)vector + i*header->type_size));
+	}
+}
+
 void	ft_dump_vector(t_vector* vector, bool print_capacity) {
 	t_vector_header*	header;
 
@@ -246,3 +258,5 @@ void	ft_dump_vector(t_vector* vector, bool print_capacity) {
 	ft_hexdump_color_zone(vector, (print_capacity ? header->capacity : header->len) * header->type_size,
 		1, 0, header->type_size);
 }
+
+
