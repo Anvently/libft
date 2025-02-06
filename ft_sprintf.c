@@ -88,25 +88,25 @@ static size_t	parse_format(char* buffer, size_t size, const char* format, va_lis
 					switch (*(format + 2))
 					{
 						case 'd':
-							nwrite = ft_putnbr_buffer(va_arg(args, int), buffer + len, size - len);
+							nwrite = ft_putnbr_buffer(va_arg(args, long int), buffer + len, size - len);
 							len += nwrite;
 							format += 3;
 							break;
 
 						case 'u':
-							nwrite = ft_putunbr_buffer(va_arg(args, unsigned int), buffer + len, size - len);
+							nwrite = ft_putunbr_buffer(va_arg(args, long unsigned int), buffer + len, size - len);
 							len += nwrite;
 							format += 3;
 							break;
 
 						case 'x':
-							nwrite = ft_putunbr_base_buffer(va_arg(args, unsigned int), buffer + len, size - len, "0123456789abcdef");
+							nwrite = ft_putunbr_base_buffer(va_arg(args, long unsigned int), buffer + len, size - len, "0123456789abcdef");
 							len += nwrite;
 							format += 3;
 							break;
 
 						case 'X':
-							nwrite = ft_putunbr_base_buffer(va_arg(args, unsigned int), buffer + len, size - len, "0123456789ABCDEF");
+							nwrite = ft_putunbr_base_buffer(va_arg(args, long unsigned int), buffer + len, size - len, "0123456789ABCDEF");
 							len += nwrite;
 							format += 3;
 							break;

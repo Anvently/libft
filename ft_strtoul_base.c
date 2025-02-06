@@ -18,7 +18,7 @@ static int	base_index(const char* base, char c) {
 	int	index = 0;
 
 	while (*base) {
-		if (*base == c)
+		if (*base++ == c)
 			return (index);
 		index++;
 	}
@@ -37,19 +37,21 @@ static int	base_index(const char* base, char c) {
 int		ft_strtoul_base(const char* str, unsigned long* dest, const char** ptr, const char* base) {
 	const size_t	len_base = ft_strlen(base);
 	int				index;
-	size_t			i;
+	// size_t			i;
 
-	i = 0;
+	// i = 0;
 	*dest = 0;
 	if (ptr == NULL)
 		ptr = &str;
 	while (ft_isspace(**ptr))
-		i++;
+		(*ptr)++;
 	index = base_index(base, **ptr);
 	if (index < 0)
 		return (2);
-	while ((index = base_index(base, *(*ptr)++)) >= 0)
+	while ((index = base_index(base, **ptr)) >= 0) {
 		if (increment_nbr(dest, index, len_base))
 			return (1);
+		(*ptr)++;
+	}
 	return (0);
 }
