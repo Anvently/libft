@@ -24,10 +24,10 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 	if (n == 0 || dest == src)
 		return (dest);
-	for (offset = 0; offset < (n / sizeof(long)); offset += sizeof(long))
+	for (offset = 0; offset < (n - (n % sizeof(long))); offset += sizeof(long))
 		((long *) dest)[offset / sizeof(long)] = ((long *) src)[offset / sizeof(long)];
 	for (;
-		offset < (sizeof(long) * (n / sizeof(long)) + (n % sizeof(long)));
+		offset < n;
 		offset += sizeof(unsigned char))
 		((unsigned char *) dest)[offset] = ((unsigned char *) src)[offset];
 	return (dest);
