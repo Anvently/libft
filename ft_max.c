@@ -12,9 +12,14 @@
 
 #include <libft.h>
 
-void	*ft_max(void *a, void *b, size_t size)
-{
-	if (ft_memcmp(a, b, size) < 0)
-		return (b);
-	return (a);
+void *ft_max(void *a, void *b, size_t size) {
+    if (ft_memcmp(a, b, size) < 0)
+        return (b);
+    return (a);
+}
+
+void *ft_min(void *a, void *b, size_t size) {
+    if (ft_memcmp(a, b, size) > 0)
+        return (b);
+    return (a);
 }
