@@ -485,4 +485,6 @@ int ft_options_err_invalid_argument(const char *option, const char *arg,
 int ft_options_err_ambiguous_argument(const char *option, const char *arg,
                                       const char ***valids);
 
+int check_options(t_options *options) __attribute__((weak));
+
 #endif
