@@ -47,10 +47,18 @@ enum E_ERRORS { ERROR_FATAL = -1, SUCCESS = 0, ERROR_SYS = 1, ERROR_INPUT = 2 };
 /* ---------------------------------- MATH ---------------------------------- */
 
 int ft_abs(int n);
-int ft_imax(int a, int b);
+int ft_imax(int a, int b); /// DEPRECATED
 double ft_dmax(double a, double b);
-void *ft_max(void *a, void *b, size_t size);
-void *ft_min(void *a, void *b, size_t size);
+void *ft_max(void *a, void *b, size_t size); /// DEPRECATED
+void *ft_min(void *a, void *b, size_t size); /// DEPRECATED
+int ft_min_i(int a, int b);
+int ft_max_i(int a, int b);
+unsigned int ft_min_u(unsigned int a, unsigned int b);
+unsigned int ft_max_u(unsigned int a, unsigned int b);
+unsigned long ft_min_lu(unsigned long a, unsigned long b);
+unsigned long ft_max_lu(unsigned long a, unsigned long b);
+long ft_min_ld(long a, long b);
+long ft_max_ld(long a, long b);
 
 ///------------------------ CHAR TEST -----------------------------
 

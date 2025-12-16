@@ -12,9 +12,13 @@
 
 #include <libft.h>
 
-int	ft_imax(int a, int b)
-{
-	if (a < b)
-		return (b);
-	return (a);
+/// @brief
+/// @param a
+/// @param b
+/// @return
+/// @deprecated Use ```ft_max_i``` instead
+int ft_imax(int a, int b) {
+    if (a < b)
+        return (b);
+    return (a);
 }
