@@ -75,6 +75,13 @@ int ft_options_err_ambiguous_argument(const char *option, const char *arg,
     return (ERROR_INPUT);
 }
 
+int ft_options_err_incompatible_options(const char *option1,
+                                        const char *option2) {
+    ft_dprintf(2, "%s: incompatible options ‘%s’ and ‘%s’\n", executable_name,
+               option1, option2);
+    return (ERROR_INPUT);
+}
+
 /// @brief Parse a short flag in the form and enable it
 /// @param arg
 /// @param options
